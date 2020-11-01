@@ -9,10 +9,11 @@ void initialize() {
 	               1,   // default auton
 	               selectorNames);
 
-	chassis::init();
-
 	// subsystems
+	chassis::init();
 	intake::init();
+	indexer::init();
+	flywheel::init();
 }
 
 void disabled() {
@@ -43,6 +44,12 @@ void opcontrol() {
 
 		// intake
 		intake::opcontrol();
+
+		// indexer
+		indexer::opcontrol();
+
+		// flywheel
+		flywheel::opcontrol();
 
 		// chassis
 		chassis::holonomic(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
