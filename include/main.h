@@ -7,6 +7,8 @@
 #include "ARMS/api.h"
 
 // subsystems
+#include "subsystems/flywheel.hpp"
+#include "subsystems/indexer.hpp"
 #include "subsystems/intake.hpp"
 
 // scripts

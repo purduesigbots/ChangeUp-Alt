@@ -1,8 +1,8 @@
 #include "main.h"
 
-namespace intake {
+namespace indexer {
 
-okapi::MotorGroup motors = {-17, 19};
+okapi::MotorGroup motors = {-15};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -17,14 +17,16 @@ void move(int speed) {
 void opcontrol() {
 	static int speed;
 
-	if (master.get_digital(DIGITAL_R1))
+	if (master.get_digital(DIGITAL_L1))
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R2))
+	else if (master.get_digital(DIGITAL_L2))
 		speed = -100;
+	else if (master.get_digital(DIGITAL_R1))
+		speed = 50;
 	else
 		speed = 0;
 
 	move(speed);
 }
 
-} // namespace intake
+} // namespace indexer

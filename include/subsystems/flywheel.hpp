@@ -1,15 +1,15 @@
-#ifndef _INTAKE_H_
-#define _INTAKE_H_
+#ifndef _FLYWHEEL_H_
+#define _FLYWHEEL_H_
 
 #include "okapi/api.hpp"
 
-namespace intake {
+namespace flywheel {
 
 extern okapi::MotorGroup motors;
 void init();
 void move(int speed);
 void opcontrol();
 
-} // namespace intake
+} // namespace flywheel
 
 #endif
