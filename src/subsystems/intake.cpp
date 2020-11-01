@@ -2,7 +2,7 @@
 
 namespace intake {
 
-okapi::MotorGroup motors = {5, -6};
+okapi::MotorGroup motors = {17, -19};
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> controller =
     okapi::AsyncPosControllerBuilder()
