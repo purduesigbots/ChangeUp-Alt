@@ -27,7 +27,7 @@ jobs:
     - name: Testing PROS Install 
       run: prosv5 --version
     - name: Checkout
-      uses: actions/checkout@v2.0.0
+      uses: actions/checkout@v2
       with:
         submodules: true 
     - name: make  
