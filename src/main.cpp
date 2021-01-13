@@ -2,7 +2,19 @@
 
 pros::Controller master(CONTROLLER_MASTER);
 
+int controllerTaskFn() {
+	while (1) {
+		master.clear_line(2);
+		delay(50);
+		master.print(2, 0, "%.1f, %.1f, %.1f", odom::global_x, odom::global_y,
+		             odom::heading * 180 / M_PI);
+		delay(100);
+	}
+}
+
 void initialize() {
+	selector::init();
+
 	selector::init();
 
 	chassis::init({-14, -13}, {3, 1}, // motors
@@ -10,26 +22,28 @@ void initialize() {
 	              41.45, 2.3,         // TPU
 	              5,                  // setle time
 	              1, 1,               // linear/angular thresholds
-	              8, 2,               // regular/arc slew
+	              2, 2,               // regular/arc slew
 	              0,                  // imu port
 	              {0, 0, 0},          // encoder ports
 	              0,                  // expander port
 	              10                  // joystick threshold
 	);
 	odom::init(true,  // debug output
-	           7.625, // left/right distance
-	           7.625, // middle distance
+	           7.825, // left/right distance
+	           7.825, // middle distance
 	           69.44, // left/right tpi
 	           69.44, // middle tpi
-	           true   // holonomic enabled
+	           true,  // holonomic enabled
+	           10     // exit error
+
 	);
 	pid::init(false,  // debug output
 	          .3, .5, // linear constants
 	          .8, 3,  // angular contants
-	          .05,    // arc kp
-	          .5,     // dif kp
 	          4, 0,   // linear point constants
 	          35, 0,  // angular point constants
+	          .05,    // arc kp
+	          .5,     // dif kp
 	          5       // min error
 	);
 
@@ -37,6 +51,8 @@ void initialize() {
 	intake::init();
 	indexer::init();
 	flywheel::init();
+
+	Task controllerTask(controllerTaskFn);
 }
 
 void disabled() {
@@ -61,6 +77,7 @@ void autonomous() {
 
 void opcontrol() {
 	while (true) {
+
 		// button to start autonomous for testing
 		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
@@ -79,6 +96,6 @@ void opcontrol() {
 		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127,
 		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
 
-		delay(20);
+		delay(10);
 	}
 }
