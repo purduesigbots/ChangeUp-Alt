@@ -16,7 +16,7 @@ void initialize() {
 	              0,                  // expander port
 	              10                  // joystick threshold
 	);
-	odom::init(true,  // debug output
+	odom::init(false, // debug output
 	           7.625, // left/right distance
 	           7.625, // middle distance
 	           69.44, // left/right tpi
@@ -37,6 +37,7 @@ void initialize() {
 	intake::init();
 	indexer::init();
 	flywheel::init();
+	vision::init();
 }
 
 void disabled() {
@@ -61,6 +62,7 @@ void autonomous() {
 
 void opcontrol() {
 	while (true) {
+
 		// button to start autonomous for testing
 		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
