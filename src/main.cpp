@@ -51,6 +51,7 @@ void initialize() {
 	intake::init();
 	indexer::init();
 	flywheel::init();
+	vision::init();
 
 	Task controllerTask(controllerTaskFn);
 }
