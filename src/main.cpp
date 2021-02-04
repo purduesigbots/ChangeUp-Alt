@@ -19,7 +19,7 @@ void initialize() {
 
 	chassis::init({-14, -13}, {3, 1}, // motors
 	              600,                // gearset
-	              41.45, 2.3,         // TPU
+	              41.45, 1,           // TPU
 	              5,                  // setle time
 	              1, 1,               // linear/angular thresholds
 	              2, 2,               // regular/arc slew
@@ -41,10 +41,10 @@ void initialize() {
 	          .3, .5, // linear constants
 	          .8, 3,  // angular contants
 	          4, 0,   // linear point constants
-	          35, 0,  // angular point constants
+	          50, 0,  // angular point constants
 	          .05,    // arc kp
 	          .5,     // dif kp
-	          5       // min error
+	          10       // min error
 	);
 
 	// subsystems
