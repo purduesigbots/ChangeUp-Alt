@@ -23,7 +23,7 @@ void initialize() {
 	              5,                  // setle time
 	              1, 1,               // linear/angular thresholds
 	              2, 2,               // regular/arc slew
-	              0,                  // imu port
+	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports
 	              0,                  // expander port
 	              10                  // joystick threshold

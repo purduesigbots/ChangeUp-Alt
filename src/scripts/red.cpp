@@ -8,8 +8,9 @@ void red() {
 	delay(500);
 	indexer::move(0);
 	flywheel::move(0);
+
 	vision::align();
-	odom::holo({38, 14}, -68);
+	odom::holo({10, 20}, 135);
 	delay(50);
 	chassis::fast(6, 40);
 	chassis::voltage(10);
