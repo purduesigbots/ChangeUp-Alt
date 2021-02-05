@@ -11,8 +11,8 @@ void stopAll() {
 	stopRollers();
 }
 
-void score() {
-	indexer::move(100);
+void score(double indexer_speed) {
+	indexer::move(indexer_speed);
 	flywheel::move(100);
 }
 

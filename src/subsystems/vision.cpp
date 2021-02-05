@@ -4,7 +4,7 @@
 const int target = 165;
 const double kp = .4;
 const double kd = .8;
-const int minimum = 450;
+const int minimum = 300;
 
 namespace vision {
 
@@ -45,12 +45,11 @@ void align() {
 
 	intake::move(100);
 
-	while (sensor->get_by_sig(0, 1).top_coord < 180) {
+	while (sensor->get_by_sig(0, 1).top_coord < 150) {
 		chassis::tank(60, 60);
 	}
 
 	chassis::tank(0, 0);
-	intake::move(0);
 }
 
 } // namespace vision

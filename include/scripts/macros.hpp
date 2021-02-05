@@ -5,7 +5,7 @@ namespace macro {
 
 void stopRollers();
 void stopAll();
-void score();
+void score(double intake_speed = 60);
 void intake();
 void outtake();
 
