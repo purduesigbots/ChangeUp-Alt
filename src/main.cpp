@@ -44,7 +44,7 @@ void initialize() {
 	          50, 0,  // angular point constants
 	          .05,    // arc kp
 	          .5,     // dif kp
-	          10       // min error
+	          10      // min error
 	);
 
 	// subsystems
@@ -53,7 +53,7 @@ void initialize() {
 	flywheel::init();
 	vision::init();
 
-	Task controllerTask(controllerTaskFn);
+	// Task controllerTask(controllerTaskFn);
 }
 
 void disabled() {

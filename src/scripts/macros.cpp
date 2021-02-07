@@ -18,12 +18,24 @@ void score(double indexer_speed) {
 
 void intake() {
 	intake::move(100);
-	indexer::move(50);
+	indexer::move(80);
 	flywheel::move(-10);
 }
 
+void intakeBlue() {
+	intake();
+
+	while (sensors::backLineDetect()) {
+		delay(10);
+	}
+
+	while (sensors::frontLineDetect()) {
+		delay(10);
+	}
+}
+
 void outtake() {
-	intake::move(-100);
+	intake::move(-80);
 	indexer::move(-100);
 }
 

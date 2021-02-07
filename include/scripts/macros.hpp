@@ -7,6 +7,7 @@ void stopRollers();
 void stopAll();
 void score(double intake_speed = 60);
 void intake();
+void intakeBlue();
 void outtake();
 
 } // namespace macro
