@@ -81,6 +81,13 @@ void opcontrol() {
 		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127,
 		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
 
+		if (master.get_digital(DIGITAL_A)) {
+			intake::move(100);
+			indexer::move(100);
+			flywheel::move(-100);
+			delay(500);
+		}
+
 		delay(20);
 	}
 }
