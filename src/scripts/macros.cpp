@@ -14,6 +14,8 @@ void stopAll() {
 void score(double indexer_speed) {
 	indexer::move(indexer_speed);
 	flywheel::move(100);
+	delay(950);
+	macro::intakeBlue();
 }
 
 void intake() {

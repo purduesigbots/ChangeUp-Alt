@@ -45,7 +45,7 @@ void align() {
 
 	intake::move(100);
 
-	while (sensor->get_by_sig(0, 1).top_coord < 150) {
+	while (sensor->get_by_sig(0, 1).top_coord < 180) {
 		chassis::tank(60, 60);
 	}
 
