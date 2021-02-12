@@ -20,8 +20,8 @@ void score(double indexer_speed) {
 
 void intake() {
 	intake::move(100);
-	indexer::move(80);
-	flywheel::move(-10);
+	indexer::move(100);
+	flywheel::move(-20);
 }
 
 void intakeBlue() {

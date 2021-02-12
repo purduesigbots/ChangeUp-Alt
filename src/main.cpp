@@ -17,12 +17,12 @@ void initialize() {
 
 	selector::init();
 
-	chassis::init({-14, -13}, {3, 1}, // motors
+	chassis::init({-14, -13}, {4, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU
 	              5,                  // setle time
 	              1, 1,               // linear/angular thresholds
-	              2, 2,               // regular/arc slew
+	              1, 2,               // regular/arc slew
 	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports
 	              0,                  // expander port
