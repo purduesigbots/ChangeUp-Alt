@@ -34,7 +34,7 @@ void initialize() {
 	           69.44, // left/right tpi
 	           69.44, // middle tpi
 	           true,  // holonomic enabled
-	           10     // exit error
+	           2      // exit error
 
 	);
 	pid::init(false,  // debug output
