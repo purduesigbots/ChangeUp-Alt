@@ -2,35 +2,47 @@
 
 pros::Controller master(CONTROLLER_MASTER);
 
+int controllerTaskFn() {
+	while (1) {
+		master.clear_line(2);
+		delay(50);
+		master.print(2, 0, "%.1f, %.1f, %.1f", odom::global_x, odom::global_y,
+		             odom::heading * 180 / M_PI);
+		delay(100);
+	}
+}
+
 void initialize() {
 	selector::init();
 
 	chassis::init({-14, -13}, {4, 1}, // motors
 	              600,                // gearset
-	              41.45, 2.3,         // TPU
+	              41.45, 1,           // TPU
 	              5,                  // setle time
 	              1, 1,               // linear/angular thresholds
-	              8, 2,               // regular/arc slew
-	              0,                  // imu port
+	              1, 2,               // regular/arc slew
+	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports
 	              0,                  // expander port
 	              10                  // joystick threshold
 	);
-	odom::init(false, // debug output
-	           7.625, // left/right distance
-	           7.625, // middle distance
+	odom::init(true,  // debug output
+	           7.825, // left/right distance
+	           7.825, // middle distance
 	           69.44, // left/right tpi
 	           69.44, // middle tpi
-	           true   // holonomic enabled
+	           true,  // holonomic enabled
+	           2      // exit error
+
 	);
 	pid::init(false,  // debug output
 	          .3, .5, // linear constants
 	          .8, 3,  // angular contants
+	          4, 0,   // linear point constants
+	          50, 0,  // angular point constants
 	          .05,    // arc kp
 	          .5,     // dif kp
-	          4, 0,   // linear point constants
-	          35, 0,  // angular point constants
-	          5       // min error
+	          10      // min error
 	);
 
 	// subsystems
@@ -38,6 +50,8 @@ void initialize() {
 	indexer::init();
 	flywheel::init();
 	vision::init();
+
+	// Task controllerTask(controllerTaskFn);
 }
 
 void disabled() {

@@ -8,6 +8,7 @@ const double kp_blue = .6;
 const double kd_blue = .8;
 const int minimum = 450;
 
+
 namespace vision {
 
 std::shared_ptr<Vision> sensor;
@@ -55,7 +56,6 @@ void alignRed() {
 	}
 
 	chassis::tank(0, 0);
-	intake::move(0);
 }
 
 void alignBlue() {
