@@ -4,7 +4,7 @@
 const int target = 165;
 const double kp = .4;
 const double kd = .8;
-const int minimum = 450;
+const int minimum = 300;
 
 namespace vision {
 
@@ -14,7 +14,7 @@ void init() {
 	sensor = std::make_shared<Vision>(18);
 
 	vision_signature_s_t SIG = Vision::signature_from_utility(
-	    1, 5461, 7963, 6712, -1301, -337, -819, 3.000, 1);
+	    1, 5461, 7963, 6712, -1301, -337, -819, 2.700, 1);
 
 	sensor->set_signature(1, &SIG);
 }
@@ -50,7 +50,6 @@ void align() {
 	}
 
 	chassis::tank(0, 0);
-	intake::move(0);
 }
 
 } // namespace vision
