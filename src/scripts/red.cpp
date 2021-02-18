@@ -7,7 +7,6 @@
 #include "subsystems/vision.hpp"
 
 void red() {
-
 	// deploy
 	intake::move(100);
 	indexer::move(100);
