@@ -14,18 +14,21 @@ void stopAll() {
 void score(double indexer_speed) {
 	indexer::move(indexer_speed);
 	flywheel::move(100);
-	delay(950);
+	delay(1000);
 	macro::intakeBlue();
 }
 
-void intake() {
+void intake(bool with_indexer) {
 	intake::move(100);
-	indexer::move(100);
-	flywheel::move(-20);
+	if (with_indexer) {
+		indexer::move(100);
+	}
+	flywheel::move(0);
 }
 
 void intakeBlue() {
 	intake();
+	flywheel::move(100);
 
 	while (sensors::backLineDetect()) {
 		delay(10);
@@ -34,11 +37,14 @@ void intakeBlue() {
 	while (sensors::frontLineDetect()) {
 		delay(10);
 	}
+
+	flywheel::move(0);
 }
 
 void outtake() {
-	intake::move(-80);
+	intake::move(-100);
 	indexer::move(-100);
+	flywheel::move(-100);
 }
 
 } // namespace macro

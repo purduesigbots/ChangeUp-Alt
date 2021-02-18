@@ -18,9 +18,9 @@ void initialize() {
 	chassis::init({-14, -13}, {4, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU
-	              5,                  // setle time
-	              1, 1,               // linear/angular thresholds
-	              1, 2,               // regular/arc slew
+	              7,                  // setle time
+	              7, 1,               // linear/angular thresholds
+	              2, 2,               // regular/arc slew
 	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports
 	              0,                  // expander port
@@ -37,7 +37,7 @@ void initialize() {
 	);
 	pid::init(false,  // debug output
 	          .3, .5, // linear constants
-	          .8, 3,  // angular contants
+	          1.4, 3, // angular contants
 	          4, 0,   // linear point constants
 	          50, 0,  // angular point constants
 	          .05,    // arc kp
