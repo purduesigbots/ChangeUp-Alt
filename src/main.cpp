@@ -15,8 +15,6 @@ int controllerTaskFn() {
 void initialize() {
 	selector::init();
 
-	selector::init();
-
 	chassis::init({-14, -13}, {4, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU

@@ -4,7 +4,8 @@
 namespace vision {
 
 void init();
-void align();
+void alignRed();
+void alignBlue();
 
 } // namespace vision
 
