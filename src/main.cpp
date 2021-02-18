@@ -5,7 +5,7 @@ pros::Controller master(CONTROLLER_MASTER);
 void initialize() {
 	selector::init();
 
-	chassis::init({-14, -13}, {3, 1}, // motors
+	chassis::init({-14, -13}, {4, 1}, // motors
 	              600,                // gearset
 	              41.45, 2.3,         // TPU
 	              5,                  // setle time
