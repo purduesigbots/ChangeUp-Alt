@@ -27,14 +27,20 @@ void intake(bool with_indexer) {
 }
 
 void intakeBlue() {
+	int c = 0;
+
 	intake();
 	flywheel::move(100);
 
-	while (sensors::backLineDetect()) {
+	while (c < 1000 && sensors::backLineDetect()) {
+		c += 10;
 		delay(10);
 	}
 
-	while (sensors::frontLineDetect()) {
+	c = 0;
+
+	while (c < 1000 && sensors::frontLineDetect()) {
+		c += 10;
 		delay(10);
 	}
 

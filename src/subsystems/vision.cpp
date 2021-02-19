@@ -8,7 +8,6 @@ const double kp_blue = .6;
 const double kd_blue = .8;
 const int minimum = 450;
 
-
 namespace vision {
 
 std::shared_ptr<Vision> sensor;
@@ -51,7 +50,7 @@ void alignRed() {
 
 	intake::move(100);
 
-	while (sensor->get_by_sig(0, 1).top_coord < 180) {
+	while (sensor->get_by_sig(0, 1).top_coord < 170) {
 		chassis::tank(60, 60);
 	}
 
