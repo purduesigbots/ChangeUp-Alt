@@ -14,8 +14,14 @@ void stopAll() {
 void score(double indexer_speed) {
 	indexer::move(indexer_speed);
 	flywheel::move(100);
-	delay(1000);
-	macro::intakeBlue();
+	delay(500);
+
+	int c = 0;
+
+	while (c < 500 && sensors::frontLineDetect()) {
+		c += 10;
+		delay(10);
+	}
 }
 
 void intake(bool with_indexer) {
@@ -36,14 +42,14 @@ void intakeBlue() {
 		c += 10;
 		delay(10);
 	}
+	/*
+	  c = 0;
 
-	c = 0;
-
-	while (c < 1000 && sensors::frontLineDetect()) {
-		c += 10;
-		delay(10);
-	}
-
+	  while (c < 1000 && sensors::frontLineDetect()) {
+	    c += 10;
+	    delay(10);
+	  }
+	*/
 	flywheel::move(0);
 }
 

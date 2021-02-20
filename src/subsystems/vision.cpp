@@ -6,7 +6,7 @@ const double kp_red = .4;
 const double kd_red = .8;
 const double kp_blue = .6;
 const double kd_blue = .8;
-const int minimum = 450;
+const int minimum = 300;
 
 namespace vision {
 
@@ -50,7 +50,7 @@ void alignRed() {
 
 	intake::move(100);
 
-	while (sensor->get_by_sig(0, 1).top_coord < 170) {
+	while (sensor->get_by_sig(0, 1).top_coord < 180) {
 		chassis::tank(60, 60);
 	}
 
