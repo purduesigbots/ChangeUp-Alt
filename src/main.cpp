@@ -15,7 +15,7 @@ int controllerTaskFn() {
 void initialize() {
 	selector::init();
 
-	chassis::init({-14, -13}, {4, 1}, // motors
+	chassis::init({-14, -13}, {9, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU
 	              7,                  // setle time

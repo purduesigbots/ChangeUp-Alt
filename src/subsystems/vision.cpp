@@ -1,5 +1,6 @@
 #include "ARMS/chassis.h"
 #include "main.h"
+#include "sensors.hpp"
 
 const int target = 165;
 const double kp_red = .4;
@@ -27,9 +28,10 @@ void init() {
 void alignRed() {
 
 	int pe = 0;
-	int count = 0;
 
-	while (true) {
+	intake::move(100);
+
+	while (!sensors::frontLineDetect()) {
 		int x_pos =
 		    sensor->get_by_sig(0, 1).x_middle_coord; // 0 = largest object, 1 = id
 		int error = target - x_pos;
@@ -37,21 +39,9 @@ void alignRed() {
 		int speed = error * kp_red + derivative * kd_red;
 		pe = error;
 
-		chassis::tank(-speed, speed);
-
-		if (count < minimum) {
-			count += 10;
-		} else if (chassis::settled()) {
-			break;
-		}
+		chassis::tank(60 - speed, 60 + speed);
 
 		delay(10);
-	}
-
-	intake::move(100);
-
-	while (sensor->get_by_sig(0, 1).top_coord < 180) {
-		chassis::tank(60, 60);
 	}
 
 	chassis::tank(0, 0);

@@ -14,7 +14,7 @@ void stopAll() {
 void score(double indexer_speed) {
 	indexer::move(indexer_speed);
 	flywheel::move(100);
-	delay(500);
+	delay(600);
 
 	int c = 0;
 
