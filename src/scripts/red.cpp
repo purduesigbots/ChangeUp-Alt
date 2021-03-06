@@ -45,7 +45,7 @@ void red() {
 	odom::holoThru({40.5, -8}, 0, 100, 100);
 
 	// align and intake
-	vision::align();
+	vision::alignRed();
 
 	// align with side goal
 	odom::holo({62, -14.8}, 88.6);
@@ -66,7 +66,7 @@ void red() {
 	flywheel::move(0);
 
 	// align and intake center red
-	vision::align();
+	vision::alignRed();
 
 	// move to wall red and intake
 	odom::holoThru({36.1, -2.2}, 87.5, 100, 100);
@@ -95,11 +95,11 @@ void red() {
 	macro::stopAll();
 	macro::intake();
 	chassis::turn(-60);
-	vision::align();
+	vision::alignRed();
 
 	// align with red ball
 	odom::holo({-12, -64}, -180, 100, 100);
-	vision::align();
+	vision::alignRed();
 
 	// align with side goal
 	chassis::turn(180, 80);
@@ -119,7 +119,7 @@ void red() {
 
 	// align with and intake corner ball
 	chassis::turn(-120);
-	vision::align();
+	vision::alignRed();
 
 	// align with wall ball
 	odom::holo({-22, -55}, -90, 100, 100);
@@ -146,7 +146,7 @@ void red() {
 
 	// intake center red ball
 	macro::intake();
-	vision::align();
+	vision::alignRed();
 
 	// align  with side ball, intake and score  GOAL 6
 	odom::holo({-60, 36}, -90, 100, 100);
@@ -182,7 +182,7 @@ void red() {
 	// align with corner ball and intake
 	chassis::turn(-60);
 	macro::intake();
-	vision::align();
+	vision::alignRed();
 
 	// align with side goal
 	odom::holo({20, 60}, -180, 100, 100);
@@ -204,7 +204,7 @@ void red() {
 
 	// align with ball and intake
 	chassis::turn(-90);
-	vision::align();
+	vision::alignRed();
 
 	// align with center goal
 	odom::holo({36, 0}, 0, 100, 100);

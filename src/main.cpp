@@ -1,4 +1,5 @@
 #include "main.h"
+#include "subsystems/intake.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 
@@ -15,7 +16,7 @@ int controllerTaskFn() {
 void initialize() {
 	selector::init();
 
-	chassis::init({-14, -13}, {4, 1}, // motors
+	chassis::init({-12, -13}, {9, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU
 	              5,                  // setle time
@@ -100,6 +101,7 @@ void opcontrol() {
 			intake::move(100);
 			indexer::move(100);
 			flywheel::move(-100);
+			intake::trigger();
 		}
 
 		delay(20);
