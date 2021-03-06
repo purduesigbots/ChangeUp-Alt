@@ -4,7 +4,7 @@
 namespace vision {
 
 void init();
-void alignRed();
+void alignRed(bool useActuation = true);
 void alignBlue();
 
 } // namespace vision

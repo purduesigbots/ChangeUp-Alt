@@ -1,3 +1,4 @@
+#include "pros/vision.h"
 #include "ARMS/chassis.h"
 #include "main.h"
 #include "sensors.hpp"
@@ -25,13 +26,32 @@ void init() {
 	sensor->set_signature(2, &SIG_BLUE);
 }
 
-void alignRed() {
+bool detectBall() {
+	int num = 6;
+
+	vision_object_s_t object_arr[num];
+	sensor->read_by_sig(0, 1, num, object_arr);
+
+	for (int i = 0; i < num; i++) {
+		if ((object_arr[i].x_middle_coord >= target - 50 &&
+		     object_arr[i].x_middle_coord <= target + 50) &&
+		    object_arr[i].y_middle_coord >= 190)
+			return true;
+	}
+
+	return false;
+}
+
+void alignRed(bool useActuation) { // x 120 - 180 y 180 - 211
 
 	int pe = 0;
 
+	if (useActuation) {
+		intake::open();
+	}
 	intake::move(100);
 
-	while (!sensors::frontLineDetect()) {
+	while (!detectBall()) {
 		int x_pos =
 		    sensor->get_by_sig(0, 1).x_middle_coord; // 0 = largest object, 1 = id
 		int error = target - x_pos;
@@ -44,6 +64,9 @@ void alignRed() {
 		delay(10);
 	}
 
+	if (useActuation) {
+		intake::close();
+	}
 	chassis::tank(0, 0);
 }
 
