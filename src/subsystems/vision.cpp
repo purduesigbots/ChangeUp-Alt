@@ -2,7 +2,7 @@
 #include "main.h"
 #include "sensors.hpp"
 
-const int target = 165;
+const int target = 160;
 const double kp_red = .4;
 const double kd_red = .8;
 const double kp_blue = .6;

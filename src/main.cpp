@@ -19,7 +19,7 @@ void initialize() {
 	              600,                // gearset
 	              41.45, 1,           // TPU
 	              7,                  // setle time
-	              7, 1,               // linear/angular thresholds
+	              9, 5,               // linear/angular thresholds
 	              2, 2,               // regular/arc slew
 	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports

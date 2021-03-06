@@ -53,8 +53,8 @@ void intakeBlue() {
 	flywheel::move(0);
 }
 
-void outtake() {
-	intake::move(-100);
+void outtake(double max) {
+	intake::move(-max);
 	indexer::move(-100);
 	flywheel::move(-100);
 }

@@ -2,7 +2,7 @@
 
 namespace sensors {
 
-#define LINE_THRESHOLD 2900
+#define LINE_THRESHOLD 2850
 
 ADIAnalogIn back_line_sensor('b');
 ADIAnalogIn front_line_sensor('a');
