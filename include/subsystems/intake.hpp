@@ -8,6 +8,8 @@ namespace intake {
 extern okapi::MotorGroup motors;
 void init();
 void move(int speed);
+void open();
+void close();
 void opcontrol();
 
 } // namespace intake
