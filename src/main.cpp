@@ -1,4 +1,5 @@
 #include "main.h"
+#include "subsystems/intake.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 
@@ -100,6 +101,7 @@ void opcontrol() {
 			intake::move(100);
 			indexer::move(100);
 			flywheel::move(-100);
+			intake::trigger();
 		}
 
 		delay(20);

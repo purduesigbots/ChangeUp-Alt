@@ -10,6 +10,7 @@ void init();
 void move(int speed);
 void open();
 void close();
+void trigger();
 void opcontrol();
 
 } // namespace intake
