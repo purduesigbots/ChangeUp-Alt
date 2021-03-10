@@ -9,6 +9,8 @@ extern okapi::MotorGroup motors;
 void init();
 void move(int speed);
 void opcontrol();
+void setState(int newState);
+int getState();
 
 } // namespace flywheel
 

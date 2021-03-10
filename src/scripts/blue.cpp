@@ -1,5 +1,8 @@
 #include "main.h"
 
 void blue() {
-  odom::holoThru({22, 11}, 140);
+
+	macro::intake();
+	flywheel::setState(1);
+	delay(10000);
 }

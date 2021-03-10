@@ -1,4 +1,6 @@
 #include "main.h"
+#include "subsystems/flywheel.hpp"
+#include "subsystems/sensors.hpp"
 namespace macro {
 
 void stopRollers() {
@@ -13,7 +15,7 @@ void stopAll() {
 
 void score(double indexer_speed) {
 	indexer::move(indexer_speed);
-	flywheel::move(100);
+	flywheel::setState(1);
 	delay(600);
 
 	int c = 0;
@@ -29,7 +31,6 @@ void intake(bool with_indexer) {
 	if (with_indexer) {
 		indexer::move(100);
 	}
-	flywheel::move(0);
 }
 
 void intakeBlue() {

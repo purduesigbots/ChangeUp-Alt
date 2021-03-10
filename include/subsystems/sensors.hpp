@@ -3,8 +3,13 @@
 
 namespace sensors {
 
+void init();
+
 bool frontLineDetect();
 bool backLineDetect();
+
+bool detectRed();
+bool detectBlue();
 
 } // namespace sensors
 #endif

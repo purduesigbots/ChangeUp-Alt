@@ -1,14 +1,15 @@
 #include "main.h"
+#include "subsystems/flywheel.hpp"
 #include "subsystems/intake.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 
 int controllerTaskFn() {
 	while (1) {
-		master.clear_line(2);
-		delay(50);
-		master.print(2, 0, "%.1f, %.1f, %.1f", odom::global_x, odom::global_y,
-		             odom::heading * 180 / M_PI);
+		// master.clear_line(2);
+		// delay(50);
+		flywheel::setState(1);
+		printf("%d", flywheel::getState());
 		delay(100);
 	}
 }
@@ -27,7 +28,7 @@ void initialize() {
 	              0,                  // expander port
 	              10                  // joystick threshold
 	);
-	odom::init(true,  // debug output
+	odom::init(false, // debug output
 	           7.825, // left/right distance
 	           7.825, // middle distance
 	           69.44, // left/right tpi
@@ -51,8 +52,9 @@ void initialize() {
 	indexer::init();
 	flywheel::init();
 	vision::init();
+	sensors::init();
 
-	Task controllerTask(controllerTaskFn);
+	// Task controllerTask(controllerTaskFn);
 }
 
 void disabled() {
