@@ -7,7 +7,6 @@ namespace intake {
 okapi::MotorGroup roller_motors = {-17, 19};
 okapi::MotorGroup actuation_motors = {11, -20};
 bool intakes_open;
-bool triggered;
 
 void init() {
 	roller_motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -19,7 +18,6 @@ void init() {
 	actuation_motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 
 	intakes_open = false;
-	triggered = false;
 }
 
 void move(int speed) {
@@ -38,30 +36,24 @@ void close() {
 	intakes_open = false;
 }
 
-void trigger() {
-	triggered = true;
-}
-
 void opcontrol() {
 	static int speed;
 
 	if (master.get_digital(DIGITAL_R1))
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R2))
+	else if (master.get_digital(DIGITAL_X))
 		speed = -100;
 	else
 		speed = 0;
 
 	move(speed);
 
-	if (triggered) {
-		if (master.get_digital(DIGITAL_R1)) {
-			if (intakes_open) {
-				close();
-			}
-		} else if (!intakes_open) {
+	if (master.get_digital(DIGITAL_R2)) {
+		if (!intakes_open) {
 			open();
 		}
+	} else if (intakes_open) {
+		close();
 	}
 }
 

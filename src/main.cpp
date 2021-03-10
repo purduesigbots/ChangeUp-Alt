@@ -52,7 +52,7 @@ void initialize() {
 	flywheel::init();
 	vision::init();
 
-	// Task controllerTask(controllerTaskFn);
+	Task controllerTask(controllerTaskFn);
 }
 
 void disabled() {
@@ -101,7 +101,6 @@ void opcontrol() {
 			intake::move(100);
 			indexer::move(100);
 			flywheel::move(-100);
-			intake::trigger();
 		}
 
 		delay(20);
