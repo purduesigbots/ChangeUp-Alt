@@ -33,9 +33,9 @@ bool detectBall() {
 	sensor->read_by_sig(0, 1, num, object_arr);
 
 	for (int i = 0; i < num; i++) {
-		if ((object_arr[i].x_middle_coord >= target - 50 &&
-		     object_arr[i].x_middle_coord <= target + 50) &&
-		    object_arr[i].y_middle_coord >= 180)
+		if ((object_arr[i].x_middle_coord >= target - 60 &&
+		     object_arr[i].x_middle_coord <= target + 60) &&
+		    object_arr[i].y_middle_coord >= 170)
 			return true;
 	}
 

@@ -14,14 +14,14 @@ void stopAll() {
 	stopRollers();
 }
 
-void score(double indexer_speed) {
+void score(double indexer_speed, int shootTime) {
 	indexer::move(indexer_speed);
 	flywheel::setState(1);
-	delay(600);
+	delay(shootTime);
 
 	int c = 0;
 
-	while (c < 500 && sensors::frontLineDetect()) {
+	while (c < 400 && sensors::frontLineDetect()) {
 		c += 10;
 		delay(10);
 	}

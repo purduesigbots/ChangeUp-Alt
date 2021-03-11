@@ -5,7 +5,7 @@ namespace macro {
 
 void stopRollers();
 void stopAll();
-void score(double indexer_speed = 65);
+void score(double indexer_speed = 65, int shootTime = 600);
 void intake(bool with_indexer = true);
 void intakeBlue();
 void outtake(double max = 100);
