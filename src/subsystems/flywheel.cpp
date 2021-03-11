@@ -10,7 +10,7 @@ okapi::MotorGroup motors = {-7};
 int flywheelTask() {
 	while (true) {
 		if (taskState != 0) {
-			motors.moveVoltage(12000);
+			motors.moveVoltage(80 * 120);
 			if (taskState == 1) { // red
 				if (sensors::detectBlue()) {
 					taskState = 2;

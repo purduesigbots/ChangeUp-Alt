@@ -1,5 +1,6 @@
 #include "main.h"
 #include "subsystems/flywheel.hpp"
+#include "subsystems/indexer.hpp"
 #include "subsystems/sensors.hpp"
 namespace macro {
 
@@ -24,12 +25,13 @@ void score(double indexer_speed) {
 		c += 10;
 		delay(10);
 	}
+	indexer::move(60);
 }
 
 void intake(bool with_indexer) {
 	intake::move(100);
 	if (with_indexer) {
-		indexer::move(100);
+		indexer::move(60);
 	}
 }
 

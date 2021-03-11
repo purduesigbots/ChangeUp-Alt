@@ -95,8 +95,8 @@ void opcontrol() {
 
 		// chassis
 		chassis::holonomic(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127,
-		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
+		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127,
+		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
 		// deploy macro
 		if (master.get_digital(DIGITAL_A)) {

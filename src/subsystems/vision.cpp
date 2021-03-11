@@ -35,14 +35,14 @@ bool detectBall() {
 	for (int i = 0; i < num; i++) {
 		if ((object_arr[i].x_middle_coord >= target - 50 &&
 		     object_arr[i].x_middle_coord <= target + 50) &&
-		    object_arr[i].y_middle_coord >= 190)
+		    object_arr[i].y_middle_coord >= 180)
 			return true;
 	}
 
 	return false;
 }
 
-void alignRed(bool useActuation) { // x 120 - 180 y 180 - 211
+void alignRed(bool useActuation, int timeDelay) { // x 120 - 180 y 180 - 211
 
 	int pe = 0;
 
@@ -63,6 +63,8 @@ void alignRed(bool useActuation) { // x 120 - 180 y 180 - 211
 
 		delay(10);
 	}
+
+	delay(timeDelay);
 
 	if (useActuation) {
 		intake::close();
