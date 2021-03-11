@@ -5,8 +5,8 @@ namespace sensors {
 
 #define LINE_THRESHOLD 2850
 
-#define BLUE 80
-#define RED 40
+#define BLUE 100
+#define RED 20
 
 ADIAnalogIn back_line_sensor('b');
 ADIAnalogIn front_line_sensor('a');

@@ -5,7 +5,8 @@
 
 namespace intake {
 
-extern okapi::MotorGroup motors;
+extern okapi::MotorGroup roller_motors;
+extern bool intakes_open;
 void init();
 void move(int speed);
 void open();
