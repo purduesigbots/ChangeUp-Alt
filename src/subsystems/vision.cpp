@@ -18,7 +18,7 @@ void init() {
 	sensor = std::make_shared<Vision>(18);
 
 	vision_signature_s_t SIG_RED = Vision::signature_from_utility(
-	    1, 5461, 7963, 6712, -1301, -337, -819, 2.700, 1);
+	    1, 5461, 7963, 6712, -1301, -337, -819, 2.300, 1);
 	vision_signature_s_t SIG_BLUE = Vision::signature_from_utility(
 	    2, -2941, -845, -1893, 4095, 7183, 5639, 2.800, 0);
 
@@ -42,8 +42,28 @@ bool detectBall() {
 	return false;
 }
 
+bool checkBeforeRunning() {
+	int num = 6;
+
+	vision_object_s_t object_arr[num];
+	if (sensor->read_by_sig(0, 1, num, object_arr) == 0)
+		return false;
+
+	for (int i = 0; i < num; i++) {
+		if ((object_arr[i].x_middle_coord >= 20 &&
+		     object_arr[i].x_middle_coord <= 280) &&
+		    object_arr[i].y_middle_coord >= 20)
+			return true;
+	}
+
+	return false;
+}
+
 void alignRed(bool useActuation, int timeDelay,
               int base_speed) { // x 120 - 180 y 180 - 211
+
+	if (!checkBeforeRunning())
+		return;
 
 	int pe = 0;
 

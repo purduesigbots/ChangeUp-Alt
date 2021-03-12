@@ -24,7 +24,7 @@ int flywheelTask() {
 				}
 			}
 		}
-		printf("Task state: %d\n", taskState);
+		// printf("Task state: %d\n", taskState);
 		delay(20);
 	}
 }
