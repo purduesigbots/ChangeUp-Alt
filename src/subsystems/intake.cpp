@@ -50,7 +50,7 @@ void opcontrol() {
 
 	move(speed);
 
-	if (master.get_digital(DIGITAL_R2)) {
+	if (master.get_digital(DIGITAL_R2) || master.get_digital(DIGITAL_A)) {
 		if (!intakes_open) {
 			open();
 		}

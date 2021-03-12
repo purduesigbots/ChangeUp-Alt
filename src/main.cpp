@@ -100,11 +100,9 @@ void opcontrol() {
 
 		// deploy macro
 		if (master.get_digital(DIGITAL_A)) {
-			if (!intake::intakes_open) {
-				intake::open();
-			}
-		} else if (intake::intakes_open) {
-			intake::close();
+			intake::move(100);
+			indexer::move(100);
+			flywheel::move(-70);
 		}
 
 		delay(20);
