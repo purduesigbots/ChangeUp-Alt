@@ -1,14 +1,15 @@
 #include "main.h"
+#include "subsystems/flywheel.hpp"
 #include "subsystems/intake.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 
 int controllerTaskFn() {
 	while (1) {
-		master.clear_line(2);
-		delay(50);
-		master.print(2, 0, "%.1f, %.1f, %.1f", odom::global_x, odom::global_y,
-		             odom::heading * 180 / M_PI);
+		// master.clear_line(2);
+		// delay(50);
+		flywheel::setState(1);
+		printf("%d", flywheel::getState());
 		delay(100);
 	}
 }
@@ -19,15 +20,15 @@ void initialize() {
 	chassis::init({-12, -13}, {9, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU
-	              5,                  // setle time
-	              1, 1,               // linear/angular thresholds
-	              1, 2,               // regular/arc slew
+	              12,                 // setle time
+	              6, 5,               // linear/angular thresholds
+	              2, 2,               // regular/arc slew
 	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports
 	              0,                  // expander port
 	              10                  // joystick threshold
 	);
-	odom::init(true,  // debug output
+	odom::init(false, // debug output
 	           7.825, // left/right distance
 	           7.825, // middle distance
 	           69.44, // left/right tpi
@@ -38,7 +39,7 @@ void initialize() {
 	);
 	pid::init(false,  // debug output
 	          .3, .5, // linear constants
-	          .8, 3,  // angular contants
+	          1.4, 3, // angular contants
 	          4, 0,   // linear point constants
 	          50, 0,  // angular point constants
 	          .05,    // arc kp
@@ -51,6 +52,7 @@ void initialize() {
 	indexer::init();
 	flywheel::init();
 	vision::init();
+	sensors::init();
 
 	// Task controllerTask(controllerTaskFn);
 }
@@ -93,15 +95,14 @@ void opcontrol() {
 
 		// chassis
 		chassis::holonomic(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127,
-		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
+		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127,
+		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
 		// deploy macro
 		if (master.get_digital(DIGITAL_A)) {
 			intake::move(100);
 			indexer::move(100);
-			flywheel::move(-100);
-			intake::trigger();
+			flywheel::move(-70);
 		}
 
 		delay(20);

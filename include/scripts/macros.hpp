@@ -3,12 +3,15 @@
 
 namespace macro {
 
+extern bool scoring;
+
 void stopRollers();
 void stopAll();
-void score(double intake_speed = 55);
-void intake();
+void score(double indexer_speed = 65, int shootTime = 100,
+           int flywheel_speed = 100);
+void intake(bool with_indexer = true);
 void intakeBlue();
-void outtake();
+void outtake(double max = 100);
 
 } // namespace macro
 

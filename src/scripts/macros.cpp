@@ -1,5 +1,10 @@
 #include "main.h"
+#include "subsystems/flywheel.hpp"
+#include "subsystems/indexer.hpp"
+#include "subsystems/sensors.hpp"
 namespace macro {
+
+bool scoring = false;
 
 void stopRollers() {
 	indexer::move(0);
@@ -11,34 +16,55 @@ void stopAll() {
 	stopRollers();
 }
 
-void score(double indexer_speed) {
+void score(double indexer_speed, int shootTime, int flywheel_speed) {
+	scoring = true;
 	indexer::move(indexer_speed);
-	flywheel::move(100);
-	delay(950);
-	macro::intakeBlue();
+	flywheel::setSpeed(flywheel_speed);
+	flywheel::setState(1);
+	delay(shootTime);
+
+	int c = 0;
+
+	while (c < shootTime && sensors::frontLineDetect()) {
+		c += 10;
+		delay(10);
+	}
+	indexer::move(60);
+	scoring = false;
 }
 
-void intake() {
+void intake(bool with_indexer) {
 	intake::move(100);
-	indexer::move(100);
-	flywheel::move(-20);
+	if (with_indexer) {
+		indexer::move(60);
+	}
 }
 
 void intakeBlue() {
+	int c = 0;
+
 	intake();
+	flywheel::move(100);
 
-	while (sensors::backLineDetect()) {
+	while (c < 1000 && sensors::backLineDetect()) {
+		c += 10;
 		delay(10);
 	}
+	/*
+	  c = 0;
 
-	while (sensors::frontLineDetect()) {
-		delay(10);
-	}
+	  while (c < 1000 && sensors::frontLineDetect()) {
+	    c += 10;
+	    delay(10);
+	  }
+	*/
+	flywheel::move(0);
 }
 
-void outtake() {
-	intake::move(-80);
+void outtake(double max) {
+	intake::move(-max);
 	indexer::move(-100);
+	flywheel::move(-100);
 }
 
 } // namespace macro
