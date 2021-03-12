@@ -10,7 +10,7 @@ extern bool intakes_open;
 void init();
 void move(int speed);
 void open();
-void close();
+void close(int power = 0);
 void trigger();
 void opcontrol();
 

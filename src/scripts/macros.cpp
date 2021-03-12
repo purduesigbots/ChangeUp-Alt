@@ -4,6 +4,8 @@
 #include "subsystems/sensors.hpp"
 namespace macro {
 
+bool scoring = false;
+
 void stopRollers() {
 	indexer::move(0);
 	flywheel::move(0);
@@ -14,18 +16,21 @@ void stopAll() {
 	stopRollers();
 }
 
-void score(double indexer_speed, int shootTime) {
+void score(double indexer_speed, int shootTime, int flywheel_speed) {
+	scoring = true;
 	indexer::move(indexer_speed);
+	flywheel::setSpeed(flywheel_speed);
 	flywheel::setState(1);
 	delay(shootTime);
 
 	int c = 0;
 
-	while (c < 400 && sensors::frontLineDetect()) {
+	while (c < shootTime && sensors::frontLineDetect()) {
 		c += 10;
 		delay(10);
 	}
 	indexer::move(60);
+	scoring = false;
 }
 
 void intake(bool with_indexer) {

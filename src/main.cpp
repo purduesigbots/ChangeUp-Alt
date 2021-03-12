@@ -20,8 +20,8 @@ void initialize() {
 	chassis::init({-12, -13}, {9, 1}, // motors
 	              600,                // gearset
 	              41.45, 1,           // TPU
-	              7,                  // setle time
-	              9, 5,               // linear/angular thresholds
+	              12,                 // setle time
+	              6, 5,               // linear/angular thresholds
 	              2, 2,               // regular/arc slew
 	              8,                  // imu port
 	              {0, 0, 0},          // encoder ports

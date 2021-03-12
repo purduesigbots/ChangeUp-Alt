@@ -11,7 +11,7 @@ void move(int speed);
 void opcontrol();
 void setState(int newState);
 int getState();
-
+void setSpeed(int speed);
 } // namespace flywheel
 
 #endif

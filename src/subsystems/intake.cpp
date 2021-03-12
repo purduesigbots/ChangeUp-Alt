@@ -30,9 +30,11 @@ void open() {
 	intakes_open = true;
 }
 
-void close() {
+void close(int power) {
 	actuation_motors.setBrakeMode(okapi::AbstractMotor::brakeMode::coast);
 	actuation_motors.moveAbsolute(0, 100);
+	if (power > 0)
+		actuation_motors.moveVoltage(power * 120);
 	intakes_open = false;
 }
 
