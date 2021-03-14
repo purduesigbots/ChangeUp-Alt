@@ -18,12 +18,9 @@ void init() {
 	sensor = std::make_shared<Vision>(18);
 
 	vision_signature_s_t SIG_RED = Vision::signature_from_utility(
-	    1, 5461, 7963, 6712, -1301, -337, -819, 2.300, 1);
-	vision_signature_s_t SIG_BLUE = Vision::signature_from_utility(
-	    2, -2941, -845, -1893, 4095, 7183, 5639, 2.800, 0);
-
+	    1, 2047, 8241, 5144, -655, 343, -156, 1.000, 0);
 	sensor->set_signature(1, &SIG_RED);
-	sensor->set_signature(2, &SIG_BLUE);
+	sensor->set_exposure(100);
 }
 
 bool detectBall() {
@@ -35,7 +32,7 @@ bool detectBall() {
 	for (int i = 0; i < num; i++) {
 		if ((object_arr[i].x_middle_coord >= target - 60 &&
 		     object_arr[i].x_middle_coord <= target + 60) &&
-		    object_arr[i].y_middle_coord >= 180)
+		    object_arr[i].y_middle_coord >= 150)
 			return true;
 	}
 
@@ -48,15 +45,8 @@ bool checkBeforeRunning() {
 	vision_object_s_t object_arr[num];
 	if (sensor->read_by_sig(0, 1, num, object_arr) == 0)
 		return false;
-
-	for (int i = 0; i < num; i++) {
-		if ((object_arr[i].x_middle_coord >= 20 &&
-		     object_arr[i].x_middle_coord <= 280) &&
-		    object_arr[i].y_middle_coord >= 20)
-			return true;
-	}
-
-	return false;
+	else
+		return true;
 }
 
 void alignRed(bool useActuation, int timeDelay,
@@ -80,42 +70,20 @@ void alignRed(bool useActuation, int timeDelay,
 		int speed = error * kp_red + derivative * kd_red;
 		pe = error;
 
+		if (x_pos == 0)
+			speed = 0;
+
 		chassis::tank(base_speed - speed, base_speed + speed);
 
 		delay(10);
 	}
 
-	delay(timeDelay);
+	// delay(timeDelay);
 
 	if (useActuation) {
 		intake::close();
 	}
 	chassis::tank(0, 0);
-}
-
-void alignBlue() {
-
-	int pe = 0;
-	int count = 0;
-
-	while (true) {
-		int x_pos =
-		    sensor->get_by_sig(0, 2).x_middle_coord; // 0 = largest object, 1 = id
-		int error = target - x_pos;
-		int derivative = error - pe;
-		int speed = error * kp_blue + derivative * kd_blue;
-		pe = error;
-
-		chassis::holonomic(0, 0, -speed);
-
-		if (count < minimum) {
-			count += 10;
-		} else if (chassis::settled()) {
-			break;
-		}
-
-		delay(10);
-	}
 }
 
 } // namespace vision
