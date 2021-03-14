@@ -199,7 +199,7 @@ void red() {
 	// move to line ball
 	odom::holoThru({32, 12}, 360, 100, 100);
 
-	// intake line ball
+	// intake `line` ball
 	vision::alignRed();
 
 	// align with side goal
