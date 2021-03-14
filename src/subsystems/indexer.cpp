@@ -11,14 +11,14 @@ void init() {
 }
 
 void move(int speed) {
-	motors.moveVoltage(speed * 120);
+	motors.moveVelocity(speed * 2);
 }
 
 void opcontrol() {
 	static int speed;
 
 	if (master.get_digital(DIGITAL_L1))
-		speed = 100;
+		speed = 50;
 	else if (master.get_digital(DIGITAL_L2))
 		speed = -100;
 	else if (master.get_digital(DIGITAL_R1))
