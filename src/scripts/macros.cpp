@@ -18,9 +18,10 @@ void stopAll() {
 
 void score(double indexer_speed, int shootTime, int flywheel_speed) {
 	scoring = true;
-	indexer::move(indexer_speed);
 	flywheel::setSpeed(flywheel_speed);
 	flywheel::setState(1);
+	delay(50);
+	indexer::move(indexer_speed);
 	delay(shootTime);
 	indexer::move(60);
 	scoring = false;

@@ -9,15 +9,22 @@ int flywheelSpeed = 100;
 okapi::MotorGroup motors = {-7};
 
 int flywheelTask() {
+	int c = 0;
 	while (true) {
 		if (taskState != 0) {
 			motors.moveVoltage(flywheelSpeed * 120);
 			if (taskState == 1) { // red
+				c += 10;
+				if (c == 2000) {
+					taskState = 2;
+					flywheelSpeed = 70;
+				}
 				if (sensors::detectBlue() && !macro::scoring) {
 					taskState = 2;
 					flywheelSpeed = 70;
 				}
 			} else if (taskState == 2) { // blue
+				c = 0;
 				if (sensors::detectRed()) {
 					motors.moveVoltage(0);
 					taskState = 0;
@@ -27,7 +34,7 @@ int flywheelTask() {
 		// printf("Task state: %d\n", taskState);
 		delay(20);
 	}
-}
+} // namespace flywheel
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
