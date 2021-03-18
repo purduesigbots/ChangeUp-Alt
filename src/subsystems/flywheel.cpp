@@ -17,11 +17,11 @@ int flywheelTask() {
 				c += 10;
 				if (c == 2000) {
 					taskState = 2;
-					flywheelSpeed = 70;
+					flywheelSpeed = 60;
 				}
 				if (sensors::detectBlue() && !macro::scoring) {
 					taskState = 2;
-					flywheelSpeed = 70;
+					flywheelSpeed = 60;
 				}
 			} else if (taskState == 2) { // blue
 				c = 0;
