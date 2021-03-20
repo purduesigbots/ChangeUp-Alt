@@ -26,7 +26,12 @@ int flywheelTask() {
 			} else if (taskState == 2) { // blue
 				c = 0;
 				if (sensors::detectRed()) {
-					motors.moveVoltage(0);
+					flywheelSpeed = 0;
+					taskState = 3;
+				}
+			} else if (taskState == 3) {
+				if (sensors::detectLine()) {
+					indexer::move(0);
 					taskState = 0;
 				}
 			}
