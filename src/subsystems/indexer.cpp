@@ -21,7 +21,8 @@ void opcontrol() {
 		speed = 50;
 	else if (master.get_digital(DIGITAL_L2))
 		speed = -100;
-	else if (master.get_digital(DIGITAL_R1))
+	else if (master.get_digital(DIGITAL_R1) &&
+	         !(sensors::detectRed() && sensors::detectLine()))
 		speed = 50;
 	else
 		speed = 0;

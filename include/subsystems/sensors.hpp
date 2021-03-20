@@ -7,6 +7,7 @@ void init();
 
 bool detectRed();
 bool detectBlue();
+bool detectLine();
 
 } // namespace sensors
 #endif
