@@ -7,7 +7,7 @@ extern bool scoring;
 
 void stopRollers();
 void stopAll();
-void score(double indexer_speed = 65, int shootTime = 100,
+void score(double indexer_speed = 65, int shootTime = 400,
            int flywheel_speed = 100);
 void intake(bool with_indexer = true);
 void intakeBlue();

@@ -32,7 +32,7 @@ bool detectBall() {
 	for (int i = 0; i < num; i++) {
 		if ((object_arr[i].x_middle_coord >= target - 60 &&
 		     object_arr[i].x_middle_coord <= target + 60) &&
-		    object_arr[i].y_middle_coord >= 150)
+		    object_arr[i].y_middle_coord >= 160)
 			return true;
 	}
 
@@ -52,8 +52,11 @@ bool checkBeforeRunning() {
 void alignRed(bool useActuation, int timeDelay,
               int base_speed) { // x 120 - 180 y 180 - 211
 
-	if (!checkBeforeRunning())
-		return;
+	for (int i = 0; i < 3; i++) {
+		if (!checkBeforeRunning())
+			return;
+		delay(10);
+	}
 
 	int pe = 0;
 
@@ -77,12 +80,14 @@ void alignRed(bool useActuation, int timeDelay,
 
 		delay(10);
 	}
-
-	// delay(timeDelay);
+	chassis::tank(base_speed, base_speed);
 
 	if (useActuation) {
 		intake::close();
 	}
+
+	delay(timeDelay);
+
 	chassis::tank(0, 0);
 }
 
