@@ -21,7 +21,7 @@ void red() {
 
 	// score 2 red, intake 2 blue               GOAL 1
 	chassis::fast(10, 50);
-	macro::score(40, 350);
+	macro::score(35, 350);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
@@ -64,9 +64,13 @@ void red() {
 
 	// align with middle goal and score         GOAL 3
 	odom::holo({-2, -44}, 270, 70, 100);
-	chassis::move(14);
+	intake::open(60);
+	chassis::move(8);
 	intake::close(100); // higher closing pressure to help descore
-	macro::score(50, 200, 90);
+	chassis::tank(50, 50);
+	delay(200);
+	chassis::tank(0, 0);
+	macro::score(35, 600, 80);
 	flywheel::setState(0);
 	macro::intake();
 	odom::reset({0, 0}, chassis::angle());
@@ -78,23 +82,21 @@ void red() {
 	// turn and eject 2 blue
 	flywheel::setState(2);
 	flywheel::setSpeed(60);
-	chassis::tank(-80, 80);
-	delay(80);
 
 	// move to wall red and intake
-	odom::holo({39, 40}, 90, 100, 100);
 	macro::intake();
-	odom::holoThru({38, 48}, 90, 50, 100);
+	odom::holoThru({38, 39}, 90, 70, 150);
+	odom::holoThru({38, 49}, 90, 50, 150);
 
 	// move to corner red and intake
-	odom::holoThru({37, 39}, -20, 100, 300);
-	vision::alignRed(1, 70);
+	odom::holoThru({36, 40}, -20, 100, 300);
+	vision::alignRed(true, 200);
 
 	// align with corner goal
-	odom::holo({56, 44}, 43.4, 100, 100);
+	odom::holo({56, 45}, 43.4, 100, 100);
 
 	// move and score 2 red, intake 2 blue      GOAL 4
-	chassis::fast(16, 50);
+	chassis::fast(13, 50);
 	macro::score(70);
 
 	// reset odom
@@ -112,14 +114,14 @@ void red() {
 	odom::holo({-12, -61}, 0, 100, 100);
 
 	// score 2 red and intake 1 blue            GOAL 5
-	chassis::fast(13, 50);
-	macro::score(45, 100);
+	chassis::fast(11, 60);
+	macro::score(65, 60);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
 
 	// outtake blue ball
-	odom::holo({-10, 0}, 40, 50, 150);
+	odom::holo({-24, 0}, 80, 100, 100);
 
 	// align with and intake corner ball
 	odom::holoThru({-8, -16}, -90, 80, 100);
@@ -128,7 +130,7 @@ void red() {
 
 	// align with and intake wall ball
 	macro::intake();
-	odom::holo({-20, -69}, -90, 100, 100);
+	odom::holo({-20, -68}, -90, 100, 100);
 
 	// align with corner goal
 	odom::holo({-4, -50}, -45, 100, 100);
@@ -147,12 +149,12 @@ void red() {
 
 	// intake with chained vision
 	vision::alignRed(true, 600);
-	vision::alignRed();
+	vision::alignRed(true, 100);
 
 	// align  with side goal and score          GOAL 7
-	odom::holo({-110, 62}, 180, 100, 100);
+	odom::holo({-110, 66}, 180, 100, 100);
 	chassis::fast(15, 50);
-	macro::score(65);
+	macro::score(45);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
@@ -164,10 +166,10 @@ void red() {
 	vision::alignRed();
 
 	// align with corner goal
-	odom::holo({9, -49}, 223, 100, 100);
+	odom::holo({9, -51}, 223, 100, 100);
 
 	// score                                    GOAL 8
-	chassis::fast(13, 50);
+	chassis::fast(13, 40);
 	macro::score(65);
 
 	// reset odom
@@ -175,29 +177,30 @@ void red() {
 
 	// reverse, intake red ball
 	chassis::fast(-12);
-	odom::holo({22, 7}, 180, 100, 100);
+	odom::holo({22, 8}, 180, 100, 100);
 	macro::intake();
-	odom::holoThru({22, -9}, 270, 40, 150);
+	odom::holoThru({22, -8}, 270, 40, 150);
 
 	// move to line ball
-	odom::holoThru({32, 7}, 360, 100, 100);
+	odom::holoThru({32, 8}, 360, 100, 100);
 
 	// intake `line` ball
 	vision::alignRed();
 
 	// align with side goal
-	odom::holo({60, 8}, 270, 100, 100);
+	odom::holo({62, 8}, 270, 100, 100);
 
 	// move and score                           GOAL 9
-	chassis::fast(10, 50);
-	macro::score();
+	chassis::fast(9, 50);
+	macro::score(45);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
 
 	// move to center goal                      POKE
-	chassis::fast(-6);
-	odom::holo({-2, 54}, 90, 100, 200);
+	chassis::fast(-4);
+	odom::holoThru({-0.5, 48}, 90, 100, 300);
+	chassis::voltage(300);
 
 	// reverse
 	chassis::fast(-24);

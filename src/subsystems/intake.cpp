@@ -24,9 +24,9 @@ void move(int speed) {
 	roller_motors.moveVoltage(speed * 120);
 }
 
-void open() {
+void open(int position) {
 	actuation_motors.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
-	actuation_motors.moveAbsolute(120, 100);
+	actuation_motors.moveAbsolute(position, 100);
 	intakes_open = true;
 }
 

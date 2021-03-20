@@ -15,7 +15,7 @@ int flywheelTask() {
 			motors.moveVoltage(flywheelSpeed * 120);
 			if (taskState == 1) { // red
 				c += 10;
-				if (c == 2000) {
+				if (c == 1000) {
 					taskState = 2;
 					flywheelSpeed = 60;
 				}
