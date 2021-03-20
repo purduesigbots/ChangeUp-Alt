@@ -3,7 +3,5 @@
 #include "subsystems/intake.hpp"
 
 void blue() {
-	// vision::alignRed();
-	intake::close(100);
-	delay(3000);
+	vision::alignRed();
 }

@@ -14,7 +14,7 @@ void init() {
 	roller_motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 
 	actuation_motors.setGearing(okapi::AbstractMotor::gearset::green);
-	actuation_motors.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
+	actuation_motors.setBrakeMode(okapi::AbstractMotor::brakeMode::coast);
 	actuation_motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 
 	intakes_open = false;

@@ -15,7 +15,7 @@ namespace vision {
 std::shared_ptr<Vision> sensor;
 
 void init() {
-	sensor = std::make_shared<Vision>(18);
+	sensor = std::make_shared<Vision>(10);
 
 	vision_signature_s_t SIG_RED = Vision::signature_from_utility(
 	    1, 2047, 8241, 5144, -655, 343, -156, 1.000, 0);
@@ -32,7 +32,7 @@ bool detectBall() {
 	for (int i = 0; i < num; i++) {
 		if ((object_arr[i].x_middle_coord >= target - 60 &&
 		     object_arr[i].x_middle_coord <= target + 60) &&
-		    object_arr[i].y_middle_coord >= 160)
+		    object_arr[i].y_middle_coord >= 170)
 			return true;
 	}
 
