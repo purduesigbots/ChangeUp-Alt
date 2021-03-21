@@ -6,7 +6,7 @@ namespace flywheel {
 int taskState = 0;
 int flywheelSpeed = 100;
 
-okapi::MotorGroup motors = {-7};
+okapi::MotorGroup motors = {-15};
 
 int flywheelTask() {
 	int c = 0;

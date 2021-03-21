@@ -4,8 +4,8 @@
 
 namespace intake {
 
-okapi::MotorGroup roller_motors = {-17, 19};
-okapi::MotorGroup actuation_motors = {11, -20};
+okapi::MotorGroup roller_motors = {-2, 19};
+okapi::MotorGroup actuation_motors = {4, -20};
 bool intakes_open;
 
 void init() {

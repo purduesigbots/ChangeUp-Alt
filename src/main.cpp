@@ -17,16 +17,16 @@ int controllerTaskFn() {
 void initialize() {
 	selector::init();
 
-	chassis::init({-12, -13}, {9, 1}, // motors
-	              600,                // gearset
-	              41.45, 1,           // TPU
-	              12,                 // setle time
-	              6, 5,               // linear/angular thresholds
-	              2, 2,               // regular/arc slew
-	              8,                  // imu port
-	              {0, 0, 0},          // encoder ports
-	              0,                  // expander port
-	              10                  // joystick threshold
+	chassis::init({-12, -1}, {9, 7}, // motors
+	              600,               // gearset
+	              41.45, 1,          // TPU
+	              12,                // setle time
+	              6, 5,              // linear/angular thresholds
+	              2, 2,              // regular/arc slew
+	              8,                 // imu port
+	              {0, 0, 0},         // encoder ports
+	              0,                 // expander port
+	              10                 // joystick threshold
 	);
 	odom::init(false, // debug output
 	           7.825, // left/right distance
