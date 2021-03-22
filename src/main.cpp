@@ -90,6 +90,9 @@ void opcontrol() {
 		// indexer
 		indexer::opcontrol();
 
+		// ejector
+		ejector::opcontrol();
+
 		// flywheel
 		flywheel::opcontrol();
 
