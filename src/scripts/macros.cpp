@@ -27,11 +27,18 @@ void score(double indexer_speed, int shootTime, int flywheel_speed) {
 	scoring = false;
 }
 
-void intake(bool with_indexer) {
+void intake() {
+	flywheel::setState(2);
+	flywheel::setSpeed(70);
 	intake::move(100);
-	if (with_indexer) {
-		indexer::move(60);
-	}
+	indexer::move(60);
+	ejector::move(100);
+}
+
+void eject() {
+	flywheel::move(-100);
+	indexer::move(-100);
+	ejector::move(-100);
 }
 
 void outtake(double max) {

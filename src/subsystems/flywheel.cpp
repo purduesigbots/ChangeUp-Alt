@@ -5,6 +5,7 @@ namespace flywheel {
 
 int taskState = 0;
 int flywheelSpeed = 100;
+bool ejectMode = false;
 
 okapi::MotorGroup motors = {-15};
 
@@ -20,8 +21,12 @@ int flywheelTask() {
 					flywheelSpeed = 60;
 				}
 				if (sensors::detectBlue() && !macro::scoring) {
-					taskState = 2;
-					flywheelSpeed = 60;
+					if (ejectMode) {
+						taskState = 0;
+						flywheelSpeed = 0;
+					} else {
+						taskState = 2;
+					}
 				}
 			} else if (taskState == 2) { // blue
 				c = 0;
@@ -77,6 +82,10 @@ void setState(int newState) {
 
 int getState() {
 	return taskState;
+}
+
+void setEjectMode(bool newMode) {
+	ejectMode = newMode;
 }
 
 } // namespace flywheel
