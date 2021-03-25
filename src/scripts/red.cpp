@@ -17,7 +17,7 @@ void red() {
 	odom::holo({-2, 17}, 127, 100, 150);
 
 	// score 2 red, intake 2 blue               GOAL 1
-	chassis::voltage(500);
+	chassis::voltage(500, 50);
 	macro::score(35, 350);
 
 	// reset odom
@@ -43,7 +43,7 @@ void red() {
 	odom::holo({63, -6}, 90, 100, 300);
 
 	// move and score 2 red and intake 1 blue   GOAL 2
-	chassis::fast(5, 40);
+	chassis::voltage(500, 40);
 	macro::score(80, 350);
 
 	// reset odom
@@ -93,7 +93,7 @@ void red() {
 	chassis::waitUntilSettled();
 
 	// move and score 2 red, intake 2 blue      GOAL 4
-	chassis::fast(10, 40);
+	chassis::voltage(500, 40);
 	macro::score(100);
 
 	// reset odom
@@ -101,16 +101,16 @@ void red() {
 
 	// reverse
 	macro::intake();
-	odom::holoThru({-12, -12}, 90);
+	odom::holoThru({-12, 0}, 90);
 	vision::alignRedBack();
-	odom::holoThru({-36, -48}, 90);
+	odom::holoThru({-36, -36}, 90);
 	vision::alignRedBack();
 
 	// align with side goal
 	odom::holo({-12, -61}, 0, 100, 100);
 
 	// score 2 red and intake 1 blue            GOAL 5
-	chassis::fast(8, 40);
+	chassis::voltage(500, 40);
 	flywheel::setEjectMode(true);
 	macro::score(80, 250);
 
@@ -135,7 +135,7 @@ void red() {
 	odom::holo({-4, -48}, -45, 100, 100);
 
 	// score 2 red and intake 2 blue            GOAL 6
-	chassis::fast(15, 40);
+	chassis::voltage(500, 40);
 	macro::score(70);
 
 	// reset odom
@@ -155,7 +155,7 @@ void red() {
 
 	// align  with side goal and score          GOAL 7
 	odom::holo({-110, 66}, 180, 100, 100);
-	chassis::fast(10, 40);
+	chassis::voltage(500, 40);
 	macro::score(70);
 
 	// reset odom
@@ -175,7 +175,7 @@ void red() {
 	odom::holo({9, -52.5}, 223, 100, 100);
 
 	// score                                    GOAL 8
-	chassis::fast(13, 40);
+	chassis::voltage(500, 40);
 	macro::score(65, 400, 75);
 
 	// reset odom
@@ -200,7 +200,7 @@ void red() {
 	odom::holo({62, 8}, 270, 100, 100);
 
 	// move and score                           GOAL 9
-	chassis::fast(9, 40);
+	chassis::voltage(500, 40);
 	macro::score(45);
 
 	// reset odom
