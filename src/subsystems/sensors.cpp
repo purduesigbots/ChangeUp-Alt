@@ -5,7 +5,7 @@ namespace sensors {
 
 #define BLUE 100
 #define RED 20
-#define LINE_THRESH 2850
+#define LINE_THRESH 2900
 
 Optical color(13);
 ADIAnalogIn line_sensor('a');

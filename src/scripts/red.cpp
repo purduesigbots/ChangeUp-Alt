@@ -1,5 +1,7 @@
 #include "macros.hpp"
 #include "main.h"
+#include "subsystems/flywheel.hpp"
+#include "subsystems/intake.hpp"
 
 void red() {
 
@@ -14,11 +16,12 @@ void red() {
 	flywheel::setState(2);
 
 	// align with corner goal
-	odom::holo({-2, 17}, 127, 100, 150);
+	odom::holo({0, 19}, 127, 100, 150);
 
 	// score 2 red, intake 2 blue               GOAL 1
-	chassis::voltage(500, 50);
-	macro::score(35, 350);
+	chassis::tank(40, 40);
+	delay(400);
+	macro::score(35, 400);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
@@ -40,10 +43,11 @@ void red() {
 	vision::alignRedFront(1, 100);
 
 	// align with side goal
-	odom::holo({63, -6}, 90, 100, 300);
+	odom::holo({59, -6}, 90, 100, 300);
 
 	// move and score 2 red and intake 1 blue   GOAL 2
 	chassis::voltage(500, 40);
+	flywheel::setEjectMode(true);
 	macro::score(80, 350);
 
 	// reset odom
@@ -53,47 +57,41 @@ void red() {
 	chassis::fast(-4);
 	intake::move(-100); // spit out any blue balls in the intake
 	chassis::turn(180);
+	macro::eject();
 
 	// align and intake center red
 	vision::alignRedFront();
+	macro::intake();
 
 	// align with middle goal and score         GOAL 3
-	odom::holo({-3, -44}, 270, 70, 100);
-	intake::open(60);
-	chassis::move(10);
-	intake::close(100); // higher closing pressure to help descore
-	chassis::tank(50, 50);
+	odom::holo({0, -44}, 270, 70, 100);
+	macro::intake();
+	ejector::move(-50);
+	chassis::move(12);
+	delay(500);
+	indexer::move(60);
+	intake::move(100);
+	delay(1000);
+	chassis::voltage(100, -100);
+	delay(80);
+	chassis::voltage(200, 50);
+	delay(500);
+	macro::score(60, 400, 77);
+	odom::reset({0, 0}, -90);
 	delay(200);
-	chassis::tank(0, 0);
-	macro::score(80, 400, 77);
-	flywheel::setState(0);
-	flywheel::move(0);
+	chassis::move(-24);
+
+	// eject balls, move to ball, and intake
+	macro::eject();
+	odom::holo({20, 12}, 30);
+	vision::alignRedFront();
 	macro::intake();
-	odom::reset({0, 0}, chassis::angle());
-
-	// reverse
-	intake::close();
-	chassis::fast(-4, 100);
-
-	// turn and eject 2 blue
-	flywheel::setState(2);
-	flywheel::setSpeed(100);
-
-	chassis::fast(-4, 100);
-
-	// move to wall red and intake
-	macro::intake();
-	odom::holoThru({20, 30}, 180, 100, 150);
-	odom::holoThru({33, 39}, 90, 100, 150);
-	odom::holoThru({36, 49}, 90, 50, 150);
 
 	// align with corner goal
-	odom::holoAsync({56, 45}, 43.4, 100, 100);
-	delay(1000);
-	chassis::waitUntilSettled();
+	odom::holoAsync({52, 50}, 43.4, 100, 100);
 
 	// move and score 2 red, intake 2 blue      GOAL 4
-	chassis::voltage(500, 40);
+	chassis::voltage(500, 60);
 	macro::score(100);
 
 	// reset odom
