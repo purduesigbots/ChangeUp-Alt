@@ -23,6 +23,7 @@ int flywheelTask() {
 				if (sensors::detectBlue() && !macro::scoring) {
 					if (ejectMode) {
 						move(0);
+						indexer::move(50);
 					} else {
 						taskState = 2;
 					}

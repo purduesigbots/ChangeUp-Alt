@@ -4,5 +4,4 @@
 #include "subsystems/vision.hpp"
 
 void blue() {
-	chassis::voltage(1000);
 }

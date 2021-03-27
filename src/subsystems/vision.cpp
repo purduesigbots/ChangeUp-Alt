@@ -25,7 +25,7 @@ void init() {
 	    1, 4343, 7021, 5682, -1209, -199, -704, 1.700, 0);
 
 	front_sensor->set_signature(1, &SIG_RED_FRONT);
-	front_sensor->set_exposure(100);
+	front_sensor->set_exposure(80);
 	back_sensor->set_signature(1, &SIG_RED_BACK);
 	back_sensor->set_exposure(48);
 }
@@ -72,11 +72,13 @@ bool checkBeforeRunning(bool front = true) {
 void alignRedFront(bool useActuation, int timeDelay,
                    int base_speed) { // x 120 - 180 y 180 - 211
 
+	/*
 	for (int i = 0; i < 3; i++) {
-		if (!checkBeforeRunning())
-			return;
-		delay(10);
+	  if (!checkBeforeRunning())
+	    return;
+	  delay(10);
 	}
+	*/
 
 	int pe = 0;
 

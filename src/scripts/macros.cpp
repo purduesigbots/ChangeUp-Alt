@@ -23,7 +23,7 @@ void score(double indexer_speed, int shootTime, int flywheel_speed) {
 	delay(50);
 	indexer::move(indexer_speed);
 	delay(shootTime);
-	indexer::move(60);
+	indexer::move(50);
 	scoring = false;
 }
 
