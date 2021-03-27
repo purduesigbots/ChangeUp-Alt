@@ -8,6 +8,7 @@ void init();
 bool detectRed();
 bool detectBlue();
 bool detectLine();
+int read_ul_side();
 
 } // namespace sensors
 #endif

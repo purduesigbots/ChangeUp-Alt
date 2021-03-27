@@ -13,6 +13,7 @@ void intake();
 void eject();
 void intakeBlue();
 void outtake(double max = 100);
+void sideGoalAlign(double angle);
 
 } // namespace macro
 

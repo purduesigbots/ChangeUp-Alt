@@ -47,4 +47,16 @@ void outtake(double max) {
 	flywheel::move(-100);
 }
 
+void sideGoalAlign(double angle) {
+	while (1) {
+		double sv = chassis::angle();
+		while (sv > 360)
+			sv -= 360;
+		while (sv < -360)
+			sv += 360;
+		double turnSpeed = (angle - sv) * 4;
+		chassis::holonomic(0, 0, turnSpeed);
+	}
+}
+
 } // namespace macro
