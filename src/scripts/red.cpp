@@ -185,7 +185,7 @@ void red() {
 	vision::alignRedFront(false, 100);
 
 	// align  with side goal and score          GOAL 7
-	odom::holo({-110, 51}, 180, 100, 100);
+	odom::holo({-110, 49}, 185, 100, 100);
 	chassis::tank(60, 60);
 	delay(600);
 	macro::score(35, 400);
