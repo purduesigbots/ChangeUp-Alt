@@ -10,8 +10,8 @@ namespace sensors {
 
 Optical color(13);
 ADIAnalogIn line_sensor('a');
-ADIUltrasonic ul_side('c', 'd');
-ADIUltrasonic ul_left('g', 'h');
+ADIUltrasonic ul_side('g', 'h');
+ADIUltrasonic ul_left('c', 'd');
 ADIUltrasonic ul_right('e', 'f');
 
 void init() {
@@ -30,20 +30,17 @@ bool detectLine() {
 	return (line_sensor.get_value() <= LINE_THRESH);
 }
 
-int read_ul_side() {
-	return ul_side.get_value();
-}
-
 void get_xy_offset(double target_angle) {
 
 	double angle = fmod(chassis::angle(), 360);
 	double theta = fabs(angle - target_angle) * M_PI / 180;
 
-	double x = ul_right.get_value() / 25.4 * cos(theta);
-	double y = ul_left.get_value() / 25.4 * cos(theta);
+	theta = 0; // disregard imu
 
-	printf("%d %d %lf %lf %lf\n", ul_right.get_value(), ul_left.get_value(), x, y,
-	       theta);
+	double y = ul_right.get_value() / 25.4 * cos(theta);
+	double x = ul_left.get_value() / 25.4 * cos(theta);
+
+	printf("%.2f %.2f\n", x, y);
 }
 
 } // namespace sensors
