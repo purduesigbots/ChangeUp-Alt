@@ -49,14 +49,53 @@ void outtake(double max) {
 }
 
 void sideGoalAlign(double angle) {
+	double prevAngError = 0;
+
+	double prevStrafeError = 0;
+	double totalStrafeError = 0;
+
+	double c = 0;
 	while (1) {
 		double sv = chassis::angle();
-		while (sv > 360)
-			sv -= 360;
-		while (sv < -360)
-			sv += 360;
-		double turnSpeed = (angle - sv) * 4;
-		chassis::holonomic(0, 0, turnSpeed);
+		sv = fmod(sv, 360);
+
+		double ang_error = angle - sv;
+
+		double turnSpeed = ang_error * 3 + (ang_error - prevAngError) * 14;
+		double strafeSpeed = 0;
+
+		double strafeError = 65.8 - sensors::getSideDistance();
+		if (abs(strafeError) < 4) {
+			totalStrafeError += strafeError;
+		} else {
+			totalStrafeError = 0;
+		}
+
+		if (abs(strafeError) < 1) {
+			totalStrafeError = 0;
+		}
+
+		if (abs(ang_error) < 10) {
+			strafeSpeed = strafeError * 4 + (strafeError - prevStrafeError) * 14 +
+			              totalStrafeError * 0.2;
+		}
+
+		chassis::holonomic(0, strafeSpeed, turnSpeed);
+
+		if (abs(strafeError) < 1) {
+			c += 10;
+			if (c > 250) {
+				chassis::holonomic(0, 0, 0);
+				break;
+			}
+		} else {
+			c = 0;
+		}
+
+		prevAngError = ang_error;
+		prevStrafeError = strafeError;
+
+		delay(10);
 	}
 }
 

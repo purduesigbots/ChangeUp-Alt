@@ -1,6 +1,7 @@
 #include "main.h"
 #include "subsystems/flywheel.hpp"
 #include "subsystems/intake.hpp"
+#include "subsystems/sensors.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 
@@ -111,5 +112,7 @@ void opcontrol() {
 		// sensors::get_xy_offset(-135);
 
 		delay(20);
+
+		printf("%lf\n", sensors::getSideDistance());
 	}
 }

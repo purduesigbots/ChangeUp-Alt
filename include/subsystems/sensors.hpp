@@ -10,6 +10,7 @@ void init();
 bool detectRed();
 bool detectBlue();
 bool detectLine();
+double getSideDistance();
 std::array<double, 2> get_xy_offset(double target_angle);
 
 } // namespace sensors

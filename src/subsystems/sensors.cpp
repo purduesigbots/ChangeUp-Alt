@@ -1,6 +1,7 @@
 #include "sensors.hpp"
 #include "ARMS/chassis.h"
 #include "main.h"
+#include "pros/distance.hpp"
 #include <array>
 
 namespace sensors {
@@ -11,7 +12,7 @@ namespace sensors {
 
 Optical color(13);
 ADIAnalogIn line_sensor('a');
-ADIUltrasonic ul_side('c', 'd');
+Distance distance(5);
 ADIUltrasonic ul_left('g', 'h');
 ADIUltrasonic ul_right('e', 'f');
 
@@ -29,6 +30,10 @@ bool detectBlue() {
 
 bool detectLine() {
 	return (line_sensor.get_value() <= LINE_THRESH);
+}
+
+double getSideDistance() {
+	return distance.get() / 25.4;
 }
 
 std::array<double, 2> get_xy_offset(double target_angle) {
