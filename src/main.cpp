@@ -64,18 +64,17 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	odom::reset({0, 0}, -45);
-	// switch (selector::auton) {
-	// case -1:
-	// 	blue();
-	// 	break;
-	// case 1:
-	// 	red();
-	// 	break;
-	// case 0:
-	// 	skills();
-	// 	break;
-	// }
+	switch (selector::auton) {
+	case -1:
+		blue();
+		break;
+	case 1:
+		red();
+		break;
+	case 0:
+		skills();
+		break;
+	}
 }
 
 void opcontrol() {
@@ -109,7 +108,7 @@ void opcontrol() {
 			flywheel::move(-70);
 		}
 
-		sensors::get_xy_offset(-45);
+		// sensors::get_xy_offset(-135);
 
 		delay(20);
 	}

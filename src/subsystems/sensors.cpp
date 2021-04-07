@@ -1,6 +1,7 @@
 #include "sensors.hpp"
 #include "ARMS/chassis.h"
 #include "main.h"
+#include <array>
 
 namespace sensors {
 
@@ -10,8 +11,8 @@ namespace sensors {
 
 Optical color(13);
 ADIAnalogIn line_sensor('a');
-ADIUltrasonic ul_side('g', 'h');
-ADIUltrasonic ul_left('c', 'd');
+ADIUltrasonic ul_side('c', 'd');
+ADIUltrasonic ul_left('g', 'h');
 ADIUltrasonic ul_right('e', 'f');
 
 void init() {
@@ -30,7 +31,7 @@ bool detectLine() {
 	return (line_sensor.get_value() <= LINE_THRESH);
 }
 
-void get_xy_offset(double target_angle) {
+std::array<double, 2> get_xy_offset(double target_angle) {
 
 	double angle = fmod(chassis::angle(), 360);
 	double theta = fabs(angle - target_angle) * M_PI / 180;
@@ -40,7 +41,7 @@ void get_xy_offset(double target_angle) {
 	double y = ul_right.get_value() / 25.4 * cos(theta);
 	double x = ul_left.get_value() / 25.4 * cos(theta);
 
-	printf("%.2f %.2f\n", x, y);
+	return std::array<double, 2>{x, y};
 }
 
 } // namespace sensors

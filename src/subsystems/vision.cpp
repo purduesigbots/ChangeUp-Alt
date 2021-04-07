@@ -49,7 +49,7 @@ bool detectBall(bool front = true) {
 		} else {
 			if ((object_arr[i].x_middle_coord >= target - 60 &&
 			     object_arr[i].x_middle_coord <= target + 60) &&
-			    object_arr[i].y_middle_coord <= 80)
+			    object_arr[i].y_middle_coord >= 170)
 				return true;
 		}
 	}
@@ -114,6 +114,7 @@ void alignRedFront(bool useActuation, int timeDelay,
 }
 
 void alignRedBack(int timeDelay, int base_speed) {
+
 	for (int i = 0; i < 3; i++) {
 		if (!checkBeforeRunning(false))
 			return;
@@ -121,9 +122,9 @@ void alignRedBack(int timeDelay, int base_speed) {
 	}
 
 	int pe = 0;
-	ejector::move(100);
+	intake::move(100);
 
-	while (detectBall(false)) {
+	while (!detectBall(false)) {
 		int x_pos = back_sensor->get_by_sig(0, 1)
 		                .x_middle_coord; // 0 = largest object, 1 = id
 		int error = target - x_pos;
