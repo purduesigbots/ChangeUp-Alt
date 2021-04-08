@@ -13,8 +13,8 @@ void intake();
 void eject();
 void intakeBlue();
 void outtake(double max = 100);
-void sideGoalAlign(double angle);
-void cornerGoalAlign(double angle);
+void sideGoal(double angle);
+void cornerGoal(double angle, int ballCount);
 
 } // namespace macro
 

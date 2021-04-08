@@ -6,5 +6,5 @@
 #include "subsystems/vision.hpp"
 
 void blue() {
-	macro::sideGoalAlign(0);
+	macro::cornerGoal(0, 2);
 }

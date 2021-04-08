@@ -109,10 +109,10 @@ void opcontrol() {
 			flywheel::move(-70);
 		}
 
-		// sensors::get_xy_offset(-135);
+		// ultrasonic debugging
+		// std::array<double, 2> offsets = sensors::get_xy_offset(0);
+		// printf("%.2lf,%.2lf\n", offsets[0], offsets[1]);
 
 		delay(20);
-
-		printf("%lf\n", sensors::getSideDistance());
 	}
 }

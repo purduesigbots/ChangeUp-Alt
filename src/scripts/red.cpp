@@ -19,9 +19,12 @@ void red() {
 	odom::holo({1, 21}, 127, 100, 150);
 
 	// score 2 red, intake 2 blue               GOAL 1
-	chassis::tank(40, 40);
-	delay(400);
-	macro::score(35, 500);
+	// macro::cornerGoal(135);
+
+	// old score code
+	// chassis::tank(40, 40);
+	// delay(400);
+	// macro::score(35, 500);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());

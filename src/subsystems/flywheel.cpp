@@ -6,11 +6,12 @@ namespace flywheel {
 int taskState = 0;
 int flywheelSpeed = 100;
 bool ejectMode = false;
+int c = 0;
 
 okapi::MotorGroup motors = {-15};
 
 int flywheelTask() {
-	int c = 0;
+	c = 0;
 	while (true) {
 		if (taskState != 0) {
 			motors.moveVoltage(flywheelSpeed * 120);
@@ -78,6 +79,7 @@ void setSpeed(int speed) {
 
 void setState(int newState) {
 	taskState = newState;
+	c = 0;
 }
 
 int getState() {

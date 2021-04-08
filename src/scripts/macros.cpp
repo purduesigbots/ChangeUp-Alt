@@ -19,6 +19,7 @@ void stopAll() {
 
 void score(double indexer_speed, int shootTime, int flywheel_speed) {
 	scoring = true;
+	ejector::move(100);
 	flywheel::setSpeed(flywheel_speed);
 	flywheel::setState(1);
 	delay(50);
@@ -48,7 +49,8 @@ void outtake(double max) {
 	flywheel::move(-100);
 }
 
-void sideGoalAlign(double angle) {
+void sideGoal(double angle) {
+
 	double prevAngError = 0;
 
 	double prevStrafeError = 0;
@@ -99,13 +101,17 @@ void sideGoalAlign(double angle) {
 	}
 }
 
-void cornerGoalAlign(double angle) {
+void cornerGoal(double angle, int ballCount) {
 	double prevAngError = 0;
 
 	double prevStrafeError = 0;
 	double totalStrafeError = 0;
 
 	std::array<double, 2> prevOffsets{0, 0};
+
+	bool startScoring = false;
+
+	double scoreDistance = 15;
 
 	while (1) {
 		double sv = chassis::angle();
@@ -132,13 +138,13 @@ void cornerGoalAlign(double angle) {
 			totalStrafeError = 0;
 		}
 
-		if (abs(strafeError) < 1) {
+		if (abs(strafeError) < .5) {
 			totalStrafeError = 0;
 		}
 
 		if (abs(ang_error) < 10) {
 
-			strafeSpeed = strafeError * 3 + (strafeError - prevStrafeError) * 14 +
+			strafeSpeed = strafeError * 5 + (strafeError - prevStrafeError) * 14 +
 			              totalStrafeError * 0.3;
 
 			double* min = std::min_element(std::begin(offsets), std::end(offsets));
@@ -149,9 +155,24 @@ void cornerGoalAlign(double angle) {
 
 		chassis::holonomic(forwardSpeed, strafeSpeed, turnSpeed);
 
-		if (forwardSpeed != 0 && abs((offsets[0] + offsets[1]) / 2) < 11.5) {
-			chassis::holonomic(0, 0, 0);
-			break;
+		double distance = abs((offsets[0] + offsets[1]) / 2);
+		if (forwardSpeed != 0) {
+			if (distance < scoreDistance && !startScoring) {
+				startScoring = true;
+				pros::Task task{[=] {
+					if (ballCount == 1) {
+						score(1000, 600);
+					} else if (ballCount == 2) {
+						score(10, 400);
+						score(100, 1000);
+					}
+				}};
+			}
+			if (distance < 11.5) {
+				chassis::holonomic(0, 0, 0);
+				if (!scoring && startScoring)
+					break;
+			}
 		}
 
 		prevAngError = ang_error;
