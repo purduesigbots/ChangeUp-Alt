@@ -7,10 +7,10 @@
 namespace sensors {
 
 #define BLUE 100
-#define RED 20
+#define RED 40
 #define LINE_THRESH 2900
 
-Optical color(13);
+Optical color(6);
 ADIAnalogIn line_sensor('a');
 Distance distance(5);
 ADIUltrasonic ul_left('g', 'h');

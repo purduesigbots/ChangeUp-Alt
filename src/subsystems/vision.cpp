@@ -47,9 +47,9 @@ bool detectBall(bool front = true) {
 			    object_arr[i].y_middle_coord >= 170)
 				return true;
 		} else {
-			if ((object_arr[i].x_middle_coord >= target - 60 &&
-			     object_arr[i].x_middle_coord <= target + 60) &&
-			    object_arr[i].y_middle_coord >= 170)
+			if ((object_arr[i].x_middle_coord >= target - 80 &&
+			     object_arr[i].x_middle_coord <= target + 80) &&
+			    object_arr[i].y_middle_coord >= 190)
 				return true;
 		}
 	}
@@ -135,7 +135,7 @@ void alignRedBack(int timeDelay, int base_speed) {
 		if (x_pos == 0)
 			speed = 0;
 
-		chassis::tank(-base_speed + speed, -base_speed - speed);
+		chassis::tank(-base_speed - speed, -base_speed + speed);
 
 		delay(10);
 	}
