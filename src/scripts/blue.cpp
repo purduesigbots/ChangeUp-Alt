@@ -6,5 +6,5 @@
 #include "subsystems/vision.hpp"
 
 void blue() {
-	macro::cornerGoal(0, 2);
+	odom::reset({0, 0}, 90);
 }

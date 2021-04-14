@@ -1,4 +1,5 @@
 #include "main.h"
+#include "ARMS/odom.h"
 #include "subsystems/flywheel.hpp"
 #include "subsystems/intake.hpp"
 #include "subsystems/sensors.hpp"
@@ -9,9 +10,12 @@ int controllerTaskFn() {
 	while (1) {
 		// master.clear_line(2);
 		// delay(50);
-		flywheel::setState(1);
-		printf("%d", flywheel::getState());
-		delay(100);
+		// flywheel::setState(1);
+		master.clear_line(3);
+		delay(50);
+		master.print(3, 1, "%.2lf %.2lf %.2lf", odom::global_x, odom::global_y,
+		             odom::heading_degrees);
+		delay(50);
 	}
 }
 
@@ -29,7 +33,7 @@ void initialize() {
 	              0,                 // expander port
 	              10                 // joystick threshold
 	);
-	odom::init(false, // debug output
+	odom::init(true,  // debug output
 	           7.825, // left/right distance
 	           7.825, // middle distance
 	           69.44, // left/right tpi
@@ -41,7 +45,7 @@ void initialize() {
 	pid::init(false,  // debug output
 	          .3, .5, // linear constants
 	          1.4, 3, // angular contants
-	          4, 0,   // linear point constants
+	          15, 25, // linear point constants
 	          50, 0,  // angular point constants
 	          .05,    // arc kp
 	          .5,     // dif kp

@@ -20,9 +20,9 @@ void stopAll() {
 void score(double indexer_speed, int shootTime, int flywheel_speed) {
 	scoring = true;
 	ejector::move(100);
-	flywheel::setSpeed(flywheel_speed);
 	flywheel::setState(1);
-	delay(50);
+	flywheel::setSpeed(flywheel_speed);
+	delay(100);
 	indexer::move(indexer_speed);
 	delay(shootTime);
 	indexer::move(50);
@@ -111,7 +111,7 @@ void cornerGoal(double angle, int ballCount) {
 
 	bool startScoring = false;
 
-	double scoreDistance = 18;
+	double scoreDistance = 16;
 
 	while (1) {
 		double sv = chassis::angle();
@@ -163,7 +163,7 @@ void cornerGoal(double angle, int ballCount) {
 					if (ballCount == 1) {
 						score(100, 600);
 					} else if (ballCount == 2) {
-						score(40);
+						score(40, 800);
 					}
 				}};
 			}
