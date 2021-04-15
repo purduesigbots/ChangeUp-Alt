@@ -111,7 +111,7 @@ void cornerGoal(double angle, int ballCount) {
 
 	bool startScoring = false;
 
-	double scoreDistance = 16;
+	double scoreDistance = 15;
 
 	while (1) {
 		double sv = chassis::angle();
@@ -148,7 +148,7 @@ void cornerGoal(double angle, int ballCount) {
 			              totalStrafeError * 0.3;
 
 			double* min = std::min_element(std::begin(offsets), std::end(offsets));
-			if (abs(strafeError) < 5 || *min > 15) {
+			if (abs(strafeError) < 5 || *min > 20) {
 				forwardSpeed = 60;
 			}
 		}
@@ -161,7 +161,7 @@ void cornerGoal(double angle, int ballCount) {
 				startScoring = true;
 				pros::Task task{[=] {
 					if (ballCount == 1) {
-						score(100, 600);
+						score(30, 800);
 					} else if (ballCount == 2) {
 						score(40, 800);
 					}

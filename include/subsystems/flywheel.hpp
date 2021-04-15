@@ -12,6 +12,7 @@ void opcontrol();
 void setState(int newState);
 int getState();
 void setEjectMode(bool newMode);
+void setIndexerSpace(bool newVal);
 void setSpeed(int speed);
 } // namespace flywheel
 

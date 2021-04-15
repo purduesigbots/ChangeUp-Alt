@@ -47,8 +47,8 @@ void initialize() {
 	          1.4, 3, // angular contants
 	          15, 25, // linear point constants
 	          50, 0,  // angular point constants
-	          .05,    // arc kp
-	          .5,     // dif kp
+	          .5,     // arc kp
+	          0,      // dif kp
 	          10      // min error
 	);
 
