@@ -113,6 +113,8 @@ void cornerGoal(double angle, int ballCount) {
 
 	double scoreDistance = 15;
 
+	int c = 0;
+
 	while (1) {
 		double sv = chassis::angle();
 		sv = fmod(sv, 360);
@@ -180,6 +182,10 @@ void cornerGoal(double angle, int ballCount) {
 		prevOffsets[1] = offsets[1];
 
 		delay(10);
+		c += 10;
+		if (c > 3000) {
+			break;
+		}
 	}
 }
 
