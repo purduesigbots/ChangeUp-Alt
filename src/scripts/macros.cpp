@@ -45,6 +45,7 @@ void eject() {
 
 void outtake(double max) {
 	intake::move(-max);
+	ejector::move(0);
 	indexer::move(-100);
 	flywheel::move(-100);
 }

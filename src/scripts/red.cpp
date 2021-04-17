@@ -15,7 +15,9 @@ void red() {
 	flywheel::move(-50);
 	intake::open();
 	macro::intake();
-	delay(500);
+	ejector::move(0);
+	delay(900);
+	ejector::move(100);
 	chassis::fast(-4);
 	flywheel::move(0);
 	intake::close();
@@ -25,15 +27,14 @@ void red() {
 	odom::holo({5, 15}, 127, 100, 150);
 
 	// score 2 red, intake 2 blue               GOAL 1
-	flywheel::setEjectMode(true);
 	macro::cornerGoal(135, 2);
+	delay(100);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
 
 	// backup and spit out blue
 	chassis::fast(-4);
-	macro::outtake(90);
 	odom::holoThru({16, -12}, 180, 50, 100);
 	flywheel::setEjectMode(false);
 
@@ -46,7 +47,7 @@ void red() {
 
 	// align and intake
 	macro::intake();
-	vision::alignRedBack();
+	vision::alignRedBack(600);
 
 	// align with side goal
 	odom::holo({58, -10}, 90, 100, 300);
@@ -153,7 +154,7 @@ void red() {
 	macro::cornerGoal(-135, 1);
 
 	// reset odom
-	odom::reset({0, 0}, chassis::angle());
+	odom::reset({0, 0}, -135);
 
 	// reverse and intake red
 	chassis::arcLeft(-500, 0.2);

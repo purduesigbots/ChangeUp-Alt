@@ -22,7 +22,7 @@ void init() {
 	vision_signature_s_t SIG_RED_FRONT = Vision::signature_from_utility(
 	    1, 2047, 8241, 5144, -655, 343, -156, 1.000, 0);
 	vision_signature_s_t SIG_RED_BACK = Vision::signature_from_utility(
-	    1, 4343, 7021, 5682, -1209, -199, -704, 1.700, 0);
+	    1, 5013, 7159, 6086, -1, 913, 456, 2.500, 0);
 
 	front_sensor->set_signature(1, &SIG_RED_FRONT);
 	front_sensor->set_exposure(80);
@@ -47,8 +47,8 @@ bool detectBall(bool front = true) {
 			    object_arr[i].y_middle_coord >= 170)
 				return true;
 		} else {
-			if ((object_arr[i].x_middle_coord >= target - 80 &&
-			     object_arr[i].x_middle_coord <= target + 80) &&
+			if ((object_arr[i].x_middle_coord >= 145 - 80 &&
+			     object_arr[i].x_middle_coord <= 145 + 80) &&
 			    object_arr[i].y_middle_coord >= 190)
 				return true;
 		}
