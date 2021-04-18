@@ -18,7 +18,7 @@ void opcontrol() {
 	static int speed;
 
 	if (master.get_digital(DIGITAL_L1))
-		speed = 50;
+		speed = 100;
 	else if (master.get_digital(DIGITAL_L2))
 		speed = -100;
 	else if (master.get_digital(DIGITAL_R1) &&
