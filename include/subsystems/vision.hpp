@@ -4,9 +4,9 @@
 namespace vision {
 
 void init();
-void alignRedFront(bool useActuation = true, int timeDelay = 0,
-                   int base_speed = 60);
-void alignRedBack(int timeDelay = 250, int base_speed = 60);
+void alignFront(int sig, int timeDelay = 0, int base_speed = 60,
+                bool useActuation = true);
+void alignBack(int sig, int timeDelay = 250, int base_speed = 60);
 
 } // namespace vision
 

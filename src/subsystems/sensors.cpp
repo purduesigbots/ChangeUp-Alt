@@ -12,7 +12,6 @@ namespace sensors {
 
 Optical color(5);
 ADIAnalogIn line_sensor('a');
-Distance distance(6);
 ADIUltrasonic ul_left('g', 'h');
 ADIUltrasonic ul_right('e', 'f');
 
@@ -30,10 +29,6 @@ bool detectBlue() {
 
 bool detectLine() {
 	return (line_sensor.get_value() <= LINE_THRESH);
-}
-
-double getSideDistance() {
-	return distance.get() / 25.4;
 }
 
 std::array<double, 2> get_xy_offset(double target_angle) {
