@@ -4,23 +4,23 @@
 namespace flywheel {
 
 int taskState = 0;
-int flywheelSpeed = 100;
 bool ejectMode = false;
 bool indexerSpace = true;
 int c = 0;
 
 okapi::MotorGroup motors = {-15};
+int speed = 0;
 
 int flywheelTask() {
 	c = 0;
 	while (true) {
 		if (taskState != 0) {
-			motors.moveVoltage(flywheelSpeed * 120);
+			motors.moveVoltage(speed * 120);
 			if (taskState == 1) { // red
 				c += 10;
 				if (c == 1000) {
 					taskState = 2;
-					flywheelSpeed = 60;
+					speed = 60;
 				}
 				if (sensors::detectBlue() && !macro::scoring) {
 					if (ejectMode) {
@@ -33,7 +33,7 @@ int flywheelTask() {
 			} else if (taskState == 2) { // blue
 				c = 0;
 				if (sensors::detectRed()) {
-					flywheelSpeed = 0;
+					speed = 0;
 					if (indexerSpace) {
 						taskState = 3;
 					} else {
@@ -51,7 +51,7 @@ int flywheelTask() {
 		// printf("Task state: %d\n", taskState);
 		delay(20);
 	}
-} // namespace flywheel
+}
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -62,25 +62,13 @@ void init() {
 }
 
 void move(int speed) {
+	flywheel::speed = speed;
 	motors.moveVoltage(speed * 120);
 	taskState = 0;
 }
 
-void opcontrol() {
-	static int speed;
-
-	if (master.get_digital(DIGITAL_L1))
-		speed = 100;
-	else if (master.get_digital(DIGITAL_L2))
-		speed = -100;
-	else
-		speed = 0;
-
-	move(speed);
-}
-
 void setSpeed(int speed) {
-	flywheelSpeed = speed;
+	flywheel::speed = speed;
 }
 
 void setState(int newState) {

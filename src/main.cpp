@@ -1,8 +1,4 @@
 #include "main.h"
-#include "ARMS/odom.h"
-#include "subsystems/flywheel.hpp"
-#include "subsystems/intake.hpp"
-#include "subsystems/sensors.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 
@@ -22,7 +18,7 @@ int controllerTaskFn() {
 void initialize() {
 	selector::init();
 
-	chassis::init({-12, -1}, {9, 7}, // motors
+	chassis::init({-12, -1}, {6, 7}, // motors
 	              600,               // gearset
 	              41.45, 1,          // TPU
 	              12,                // setle time
@@ -83,35 +79,79 @@ void autonomous() {
 }
 
 void opcontrol() {
+	bool intakes_open = false;
 	while (true) {
 
 		// button to start autonomous for testing
 		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
 
+		// stop all subsystems
+		intake::speed = 0;
+		indexer::speed = 0;
+		flywheel::speed = 0;
+		ejector::speed = 0;
+		intakes_open = false;
+
 		// intake
-		intake::opcontrol();
+		if (master.get_digital(DIGITAL_R1)) {
+			intake::speed = 100;
+			if (!(sensors::detectRed() && sensors::detectLine())) {
+				ejector::speed = 100;
+				indexer::speed = 50;
+			}
+		}
 
-		// indexer
-		indexer::opcontrol();
+		// actuate
+		if (master.get_digital(DIGITAL_R2)) {
+			intakes_open = true;
+		}
 
-		// ejector
-		ejector::opcontrol();
+		// score
+		if (master.get_digital(DIGITAL_L1)) {
+			indexer::speed = 100;
+			flywheel::speed = 100;
+			ejector::speed = 100;
+		}
 
-		// flywheel
-		flywheel::opcontrol();
+		// eject from top
+		if (master.get_digital(DIGITAL_L2)) {
+			if (indexer::speed == 0)
+				indexer::speed = -100;
+			if (ejector::speed == 0)
+				flywheel::speed = -100;
+			ejector::speed = -100;
+		}
+
+		// eject from bottom
+		if (master.get_digital(DIGITAL_X)) {
+			indexer::speed = -100;
+		}
+
+		// deploy macro
+		if (master.get_digital(DIGITAL_A)) {
+			intake::speed = 100;
+			indexer::speed = 100;
+			flywheel::speed = -70;
+			intakes_open = true;
+		}
 
 		// chassis
 		chassis::holonomic(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
 		                   master.get_analog(ANALOG_LEFT_X) * (double)100 / 127,
 		                   master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
-		// deploy macro
-		if (master.get_digital(DIGITAL_A)) {
-			intake::move(100);
-			indexer::move(100);
-			flywheel::move(-70);
-		}
+		// update subsystems
+		intake::move(intake::speed);
+		indexer::move(indexer::speed);
+		flywheel::move(flywheel::speed);
+		ejector::move(ejector::speed);
+
+		// update actuators
+		if (intakes_open)
+			intake::open();
+		else
+			intake::close();
 
 		// ultrasonic debugging
 		// std::array<double, 2> offsets = sensors::get_xy_offset(0);

@@ -3,6 +3,7 @@
 namespace ejector {
 
 okapi::MotorGroup motors = {17};
+int speed = 0;
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::blue);
@@ -11,23 +12,8 @@ void init() {
 }
 
 void move(int speed) {
+	ejector::speed = speed;
 	motors.moveVoltage(speed * 120);
-}
-
-void opcontrol() {
-	static int speed;
-
-	if (master.get_digital(DIGITAL_L1))
-		speed = 100;
-	else if (master.get_digital(DIGITAL_X))
-		speed = -100;
-	else if (master.get_digital(DIGITAL_R1) &&
-	         !(sensors::detectRed() && sensors::detectLine()))
-		speed = 100;
-	else
-		speed = 0;
-
-	move(speed);
 }
 
 } // namespace ejector
