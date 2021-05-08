@@ -6,13 +6,11 @@
 namespace intake {
 
 extern okapi::MotorGroup roller_motors;
-extern bool intakes_open;
+extern int speed;
 void init();
 void move(int speed);
 void open(int position = 120);
 void close(int power = 0);
-void trigger();
-void opcontrol();
 
 } // namespace intake
 

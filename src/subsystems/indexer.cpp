@@ -3,6 +3,7 @@
 namespace indexer {
 
 okapi::MotorGroup motors = {-3};
+int speed = 0;
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -11,23 +12,8 @@ void init() {
 }
 
 void move(int speed) {
+	indexer::speed = speed;
 	motors.moveVelocity(speed * 2);
-}
-
-void opcontrol() {
-	static int speed;
-
-	if (master.get_digital(DIGITAL_L1))
-		speed = 100;
-	else if (master.get_digital(DIGITAL_L2))
-		speed = -100;
-	else if (master.get_digital(DIGITAL_R1) &&
-	         !(sensors::detectRed() && sensors::detectLine()))
-		speed = 50;
-	else
-		speed = 0;
-
-	move(speed);
 }
 
 } // namespace indexer

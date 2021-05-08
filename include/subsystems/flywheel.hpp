@@ -6,9 +6,9 @@
 namespace flywheel {
 
 extern okapi::MotorGroup motors;
+extern int speed;
 void init();
 void move(int speed);
-void opcontrol();
 void setState(int newState);
 int getState();
 void setEjectMode(bool newMode);
