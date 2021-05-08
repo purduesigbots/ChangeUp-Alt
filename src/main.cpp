@@ -42,14 +42,14 @@ void initialize() {
 	           2      // exit error
 
 	);
-	pid::init(false,  // debug output
-	          .3, .5, // linear constants
-	          1.4, 3, // angular contants
-	          15, 25, // linear point constants
-	          50, 0,  // angular point constants
-	          .5,     // arc kp
-	          0,      // dif kp
-	          10      // min error
+	pid::init(false,     // debug output
+	          .3, 0, .5, // linear constants
+	          1.4, 0, 3, // angular contants
+	          15, 0, 25, // linear point constants
+	          50, 0, 0,  // angular point constants
+	          .5,        // arc kp
+	          0,         // dif kp
+	          10         // min error
 	);
 
 	// subsystems
