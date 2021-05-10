@@ -18,8 +18,4 @@ void move(int speed) {
 	taskState = 0;
 }
 
-void setEjectMode(bool newMode) {
-	ejectMode = newMode;
-}
-
 } // namespace flywheel
