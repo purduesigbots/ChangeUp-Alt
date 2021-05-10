@@ -8,27 +8,26 @@ namespace sensors {
 
 #define BLUE 100
 #define RED 40
-#define LINE_THRESH 2900
 
-Optical color(5);
+// Optical color(5);
 ADIAnalogIn line_sensor('a');
 ADIUltrasonic ul_left('g', 'h');
 ADIUltrasonic ul_right('e', 'f');
 
 void init() {
-	color.set_led_pwm(100);
+	// color.set_led_pwm(100);
 }
 
-bool detectRed() {
-	return (color.get_hue() <= RED);
-}
+// bool red() {
+// 	return (color.get_hue() <= RED);
+// }
 
-bool detectBlue() {
-	return (color.get_hue() >= BLUE);
-}
+// bool blue() {
+// 	return (color.get_hue() >= BLUE);
+// }
 
-bool detectLine() {
-	return (line_sensor.get_value() <= LINE_THRESH);
+bool line() {
+	return (line_sensor.get_value() <= 2900);
 }
 
 std::array<double, 2> get_xy_offset(double target_angle) {

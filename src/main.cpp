@@ -96,10 +96,6 @@ void opcontrol() {
 		// intake
 		if (master.get_digital(DIGITAL_R1)) {
 			intake::speed = 100;
-			if (!(sensors::detectRed() && sensors::detectLine())) {
-				ejector::speed = 100;
-				indexer::speed = 50;
-			}
 		}
 
 		// actuate

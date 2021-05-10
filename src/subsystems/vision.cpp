@@ -101,7 +101,7 @@ void alignFront(int sig, int timeDelay, int base_speed,
 	if (useActuation) {
 		intake::open();
 	}
-	intake::move(100);
+	macro::intake();
 
 	while (!detectBall()) {
 		int x_pos = front_sensor->get_by_sig(0, 1)
@@ -140,7 +140,7 @@ void alignBack(int sig, int timeDelay, int base_speed) {
 	}
 
 	int pe = 0;
-	intake::move(100);
+	macro::intake();
 
 	while (!detectBall(false)) {
 		int x_pos = back_sensor->get_by_sig(0, 1)

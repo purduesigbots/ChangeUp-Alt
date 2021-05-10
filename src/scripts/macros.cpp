@@ -1,27 +1,20 @@
 #include "main.h"
-#include "subsystems/flywheel.hpp"
-#include "subsystems/indexer.hpp"
-#include "subsystems/sensors.hpp"
 #include <array>
 namespace macro {
 
 bool scoring = false;
 
-void stopRollers() {
-	indexer::move(0);
-	flywheel::move(0);
-}
-
 void stopAll() {
 	intake::move(0);
-	stopRollers();
+	indexer::move(0);
+	flywheel::move(0);
+	ejector::move(0);
 }
 
 void score(double indexer_speed, int shootTime, int flywheel_speed) {
 	scoring = true;
 	ejector::move(100);
-	flywheel::setState(1);
-	flywheel::setSpeed(flywheel_speed);
+	flywheel::move(flywheel_speed);
 	delay(100);
 	indexer::move(indexer_speed);
 	delay(shootTime);
@@ -30,8 +23,7 @@ void score(double indexer_speed, int shootTime, int flywheel_speed) {
 }
 
 void intake() {
-	flywheel::setState(2);
-	flywheel::setSpeed(70);
+	flywheel::move(0);
 	intake::move(100);
 	indexer::move(60);
 	ejector::move(100);

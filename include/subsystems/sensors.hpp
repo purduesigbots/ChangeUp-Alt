@@ -7,9 +7,9 @@ namespace sensors {
 
 void init();
 
-bool detectRed();
-bool detectBlue();
-bool detectLine();
+bool red();
+bool blue();
+bool line();
 double getSideDistance();
 std::array<double, 2> get_xy_offset(double target_angle);
 
