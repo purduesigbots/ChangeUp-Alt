@@ -15,7 +15,6 @@ void init() {
 void move(int speed) {
 	flywheel::speed = speed;
 	motors.moveVoltage(speed * 120);
-	taskState = 0;
 }
 
 } // namespace flywheel
