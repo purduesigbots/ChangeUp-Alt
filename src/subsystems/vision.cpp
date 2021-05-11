@@ -23,6 +23,7 @@ void init() {
 	back_sensor = std::make_shared<Vision>(16);
 
 	// lab daytime
+	/*
 	signatures[0] = Vision::signature_from_utility(1, 3435, 7005, 5220, -875, 47,
 	                                               -414, 2.000, 0);
 	signatures[1] = Vision::signature_from_utility(1, 3205, 6485, 4845, -775, 251,
@@ -39,6 +40,25 @@ void init() {
 	                                               -242, 2.700, 0);
 	signatures[7] = Vision::signature_from_utility(1, 3905, 6721, 5314, -685, 201,
 	                                               -242, 2.700, 0);
+	*/
+
+	// micah's basement
+	signatures[0] = Vision::signature_from_utility(1, 5829, 8723, 7276, -2245,
+	                                               -333, -1289, 2.700, 0);
+	signatures[1] = Vision::signature_from_utility(1, 5461, 8033, 6747, -2221,
+	                                               -261, -1241, 2.800, 0);
+	signatures[2] = Vision::signature_from_utility(1, 4297, 8529, 6413, -2631,
+	                                               -521, -1576, 1.600, 0);
+	signatures[3] = Vision::signature_from_utility(1, 5335, 8057, 6696, -1883,
+	                                               253, -815, 2.800, 0);
+	signatures[4] = Vision::signature_from_utility(1, 3959, 8283, 6121, -1251,
+	                                               3739, 1244, 2.200, 0);
+	signatures[5] = Vision::signature_from_utility(1, 3597, 6695, 5146, -1681,
+	                                               167, -757, 2.100, 0);
+	signatures[6] = Vision::signature_from_utility(1, 5799, 8065, 6932, -1839,
+	                                               -207, -1022, 3.000, 0);
+	signatures[7] = Vision::signature_from_utility(1, 5057, 7037, 6047, -1827, 1,
+	                                               -913, 3.600, 0);
 
 	front_sensor->set_exposure(70);
 	back_sensor->set_exposure(70);
