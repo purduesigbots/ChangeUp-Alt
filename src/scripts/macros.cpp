@@ -11,12 +11,14 @@ void stopAll() {
 	ejector::move(0);
 }
 
-void score(double indexer_speed, int shootTime, int flywheel_speed) {
+void score(int shootTime, int flywheel_speed) {
 	scoring = true;
-	ejector::move(100);
+	indexer::move(0);
+	ejector::move(0);
 	flywheel::move(flywheel_speed);
-	delay(100);
-	indexer::move(indexer_speed);
+	delay(200);
+	indexer::move(100);
+	ejector::move(100);
 	delay(shootTime);
 	indexer::move(50);
 	scoring = false;
@@ -42,58 +44,6 @@ void outtake(double max) {
 	flywheel::move(-100);
 }
 
-void sideGoal(double angle) {
-
-	double prevAngError = 0;
-
-	double prevStrafeError = 0;
-	double totalStrafeError = 0;
-
-	double c = 0;
-	while (1) {
-		double sv = chassis::angle();
-		sv = fmod(sv, 360);
-
-		double ang_error = angle - sv;
-
-		double turnSpeed = ang_error * 3 + (ang_error - prevAngError) * 14;
-		double strafeSpeed = 0;
-
-		double strafeError = 65.8 - sensors::getSideDistance();
-		if (abs(strafeError) < 4) {
-			totalStrafeError += strafeError;
-		} else {
-			totalStrafeError = 0;
-		}
-
-		if (strafeError * prevStrafeError < 0) {
-			totalStrafeError = 0;
-		}
-
-		if (abs(ang_error) < 10) {
-			strafeSpeed = strafeError * 4 + (strafeError - prevStrafeError) * 14 +
-			              totalStrafeError * 0.2;
-		}
-
-		chassis::holonomic(0, strafeSpeed, turnSpeed);
-
-		if (abs(strafeError) < 1) {
-			c += 10;
-			if (c > 250) {
-				chassis::holonomic(0, 0, 0);
-				break;
-			}
-		} else {
-			c = 0;
-		}
-
-		prevAngError = ang_error;
-		prevStrafeError = strafeError;
-
-		delay(10);
-	}
-}
-
 void cornerGoal(double angle, int ballCount) {
 	double prevAngError = 0;
 
@@ -104,7 +54,7 @@ void cornerGoal(double angle, int ballCount) {
 
 	bool startScoring = false;
 
-	double scoreDistance = 15;
+	double scoreDistance = 14;
 
 	int c = 0;
 
@@ -156,9 +106,9 @@ void cornerGoal(double angle, int ballCount) {
 				startScoring = true;
 				pros::Task task{[=] {
 					if (ballCount == 1) {
-						score(30, 800);
+						score(400);
 					} else if (ballCount == 2) {
-						score(40, 800);
+						score(800);
 					}
 				}};
 			}
