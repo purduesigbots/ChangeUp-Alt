@@ -13,7 +13,7 @@ void init() {
 
 void move(int speed) {
 	indexer::speed = speed;
-	motors.moveVelocity(speed * 2);
+	motors.moveVoltage(speed * 120);
 }
 
 } // namespace indexer
