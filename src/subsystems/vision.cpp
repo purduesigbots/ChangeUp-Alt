@@ -7,8 +7,6 @@ const int frontTarget = 160;
 const int backTarget = 145;
 const double kp_red = .4;
 const double kd_red = .8;
-const double kp_blue = .6;
-const double kd_blue = .8;
 const int minimum = 300;
 
 namespace vision {

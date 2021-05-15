@@ -1,27 +1,37 @@
+#include "macros.hpp"
 #include "main.h"
+#include "subsystems/sensors.hpp"
 #include <array>
 namespace macro {
 
 bool scoring = false;
 
-void stopAll() {
-	intake::move(0);
+void stopRollers() {
 	indexer::move(0);
 	flywheel::move(0);
 	ejector::move(0);
 }
 
+void stopAll() {
+	intake::move(0);
+	stopRollers();
+}
+
 void score(int shootTime, int flywheel_speed) {
 	scoring = true;
-	indexer::move(0);
-	ejector::move(0);
 	flywheel::move(flywheel_speed);
-	delay(200);
 	indexer::move(100);
 	ejector::move(100);
 	delay(shootTime);
-	indexer::move(50);
 	scoring = false;
+}
+
+void doubleShot() {
+	score(300);
+	scoring = true;
+	stopRollers();
+	delay(300);
+	score(300);
 }
 
 void intake() {
@@ -39,7 +49,7 @@ void eject() {
 
 void outtake(double max) {
 	intake::move(-max);
-	ejector::move(0);
+	ejector::move(20);
 	indexer::move(-100);
 	flywheel::move(-100);
 }
@@ -54,7 +64,7 @@ void cornerGoal(double angle, int ballCount) {
 
 	bool startScoring = false;
 
-	double scoreDistance = 14;
+	double scoreDistance = 13;
 
 	int c = 0;
 
@@ -108,7 +118,7 @@ void cornerGoal(double angle, int ballCount) {
 					if (ballCount == 1) {
 						score(400);
 					} else if (ballCount == 2) {
-						score(800);
+						doubleShot();
 					}
 				}};
 			}
