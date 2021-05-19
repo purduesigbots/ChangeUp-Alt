@@ -3,6 +3,7 @@
 #include "ARMS/odom.h"
 #include "macros.hpp"
 #include "main.h"
+#include "subsystems/intake.hpp"
 
 void red() {
 	// deploy
@@ -43,7 +44,7 @@ void red() {
 	vision::alignFront(0);
 
 	// align with side goal
-	odom::holoAsync({61, -10}, 90, 100, 300);
+	odom::holoAsync({60, -10}, 90, 100, 300);
 	delay(700);
 	chassis::waitUntilSettled();
 
@@ -73,14 +74,15 @@ void red() {
 	// align and score corner goal                        GOAL 3
 	odom::holo({52, -1}, 45, 100, 100);
 	macro::cornerGoal(45, 2);
+	intake::open();
+	flywheel::move(80);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
 
 	// reverse and intake red
 	ejector::move(100);
-	intake::move(-20);
-	chassis::arcLeft(-1000, .36, 70);
+	chassis::arcLeft(-900, .4, 70);
 	macro::intake();
 
 	// intake second red
@@ -88,6 +90,7 @@ void red() {
 	vision::alignBack(3);
 
 	// align with side goal and score           GOAL 4
+	intake::close();
 	odom::holoAsync({-7, -61}, 0, 100, 100);
 	delay(1000);
 	chassis::waitUntilSettled();
@@ -130,7 +133,7 @@ void red() {
 	macro::intake();
 
 	// intake second ball and score             GOAL 6
-	odom::holo({-60, 28}, -90, 100, 100);
+	odom::holo({-62.5, 28}, -90, 100, 100);
 	chassis::fast(28, 60);
 	macro::score(1000);
 	macro::intake();
@@ -147,11 +150,12 @@ void red() {
 	delay(500);
 	macro::intake();
 	chassis::waitUntilSettled();
-	chassis::move(8);
+	chassis::move(12);
 
 	// align with goal and score                 GOAL 7
-	odom::holo({-48, 0}, -135, 100, 100);
+	odom::holo({-49, -1}, -135, 100, 100);
 	macro::cornerGoal(-135, 1);
+	flywheel::move(80);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
@@ -163,17 +167,17 @@ void red() {
 	// move to side goal and score               GOAL 8
 	odom::holo({9, 59}, 180, 100, 100);
 	chassis::tank(50, 50);
-	delay(200);
+	delay(500);
 	macro::score(450);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
 
 	// intake red ball
-	vision::alignBack(7, 300);
+	vision::alignBack(7);
 
 	// align with center goal while shooting blue out of the top
-	odom::holoAsync({36, 3}, 0, 30, 300);
+	odom::holoAsync({36, 4}, 0, 30, 300);
 	delay(250);
 	macro::intake();
 	chassis::waitUntilSettled();
