@@ -106,10 +106,19 @@ void opcontrol() {
 		}
 
 		// score
+		static int scoreDelay = 0;
 		if (master.get_digital(DIGITAL_L1)) {
-			indexer::speed = 100;
 			flywheel::speed = 100;
-			ejector::speed = 100;
+			if (scoreDelay > 180) {
+				indexer::speed = 100;
+				ejector::speed = 100;
+			} else {
+				indexer::speed = 0;
+				ejector::speed = 0;
+				scoreDelay += 10;
+			}
+		} else {
+			scoreDelay = 0;
 		}
 
 		// eject from top
