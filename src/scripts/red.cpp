@@ -24,13 +24,14 @@ void red() {
 	// score 2 red, intake 2 blue               GOAL 1
 	macro::cornerGoal(135, 2);
 	macro::intake();
+	indexer::move(-10);
 
 	// reset odom
 	odom::reset({0, 0}, chassis::angle());
 
 	// backup
-	macro::outtake(65);
 	chassis::fast(-4);
+	macro::outtake(65);
 	odom::holoThru({16, -12}, 180, 50, 100);
 
 	// intake 1 red
@@ -82,7 +83,7 @@ void red() {
 
 	// reverse and intake red
 	ejector::move(100);
-	chassis::arcLeft(-900, .4, 70);
+	chassis::arcLeft(-1000, .41, 70);
 	macro::intake();
 
 	// intake second red
